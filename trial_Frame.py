@@ -33,6 +33,22 @@ def seqGen(length): #this is for generating test sequences, returns a list of in
         seq.append(randint(0,3))
     return seq        
 
+def sSeqChq(sq, pCorr): #checks sequences to make sure they have enough potentially correct trials
+    newSq=[] #holds the new sequence
+    i = 0 #for keeping track of how many correct trials there are
+    for j in sq:
+        if j == sq[j-2]:
+            i+=1
+    if i/len(sq) < pCorr-0.1 or i/len(sq) > pCorr+0.1:
+        mutate = randint(0,len(sq))
+    else:
+    
+    return newSq
+
+def pSeqChq(sq1, sq2, pCorrect): #
+    
+    return 0
+    
 def popFuncLis(lis): #creates a list of test functions shuffled in a random order.
     '''
     within here all the test functions should be appeneded to the funcLis list, ie. all the tests we will run.
