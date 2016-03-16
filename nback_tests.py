@@ -14,18 +14,15 @@
 #imports
 from psychopy import visual, sound, core, event,logging
 from random import randint, shuffle
+from nback_helpers import infolooper,sSeqChq, pSeqChq
 
-#helper functions
-def infolooper(infoloop,window): #this function loops through a list of strings for presenting test specific info to participants
-    for datum in infoloop: 
-        infLin=visual.TextStim(window,datum, color=(1.0,1.0,1.0)) #make a text stimuli
-        infLin.draw() #draw stimuli
-        window.flip() #flip the window
-        event.waitKeys(keyList=['return']) #wait for the subject to press return to move to the next piece of info
 
 #test functions
-def vNback (fi, nback_no, window, seq, trial_no=None, adaptive=False, duration=1.0): #visual nback test
-    
+def vNback (fi, nback_no, window, seq, dura, trial_no=None, adaptive=False): #visual nback test
+
+    #test the sequence to make sure it has enough potential corrects    
+    #sSeqChq(seq, 0.25)
+
     #data structures
     colorcode=['red','blue','green','yellow']
     trial_no=len(seq)
@@ -59,9 +56,9 @@ def vNback (fi, nback_no, window, seq, trial_no=None, adaptive=False, duration=1
         response=None; hit=None; time=None
         trial.draw()
         starttime=window.flip()
-        #each stimulus is presented for the duration specified
-        response=event.waitKeys(maxWait=duration-(1/120.0),keyList=['l'],timeStamped=True)
-        while(logging.defaultClock.getTime() - starttime) <= duration:
+        #each stimulus is presented for the dura specified
+        response=event.waitKeys(maxWait=dura-(1/120.0),keyList=['l'],timeStamped=True)
+        while(logging.defaultClock.getTime() - starttime) <= dura:
             pass
         #Currently only RT for catch trials will be recorded
         if target[n]==1:
@@ -75,7 +72,10 @@ def vNback (fi, nback_no, window, seq, trial_no=None, adaptive=False, duration=1
         window.flip()
         core.wait(0.3)
     
-def aNback (fi, nback_no, window, seq, trial_no=None, adaptive=False, duration=1.0):
+def aNback (fi, nback_no, window, seq, dura, trial_no=None, adaptive=False):
+    
+    #test the sequence to make sure it has enough potential corrects    
+    #sSeqChq(seq, 0.25)    
     
     #data structures
     audicode=['C','D','E','F']
@@ -92,7 +92,7 @@ def aNback (fi, nback_no, window, seq, trial_no=None, adaptive=False, duration=1
 
     #create stimuli list and mark down target trials
     for i in seq:
-        stimlist.append(sound.Sound(audicode[i],octave=4, sampleRate=44100, secs=duration,bits=8))
+        stimlist.append(sound.Sound(audicode[i],octave=4, sampleRate=44100, secs=dura,bits=8))
         if n > nback_no-1:
             #if the event match with the one n events ago (n specified by argument 'nback_no')
             #mark it as a target trial
@@ -113,8 +113,8 @@ def aNback (fi, nback_no, window, seq, trial_no=None, adaptive=False, duration=1
         trial.play()
         starttime=window.flip()
         #each stimulus is played for the duration specified
-        response=event.waitKeys(maxWait=duration-(1/120.0),keyList=['l'],timeStamped=True)
-        while(logging.defaultClock.getTime() - starttime) <= duration:
+        response=event.waitKeys(maxWait=dura-(1/120.0),keyList=['l'],timeStamped=True)
+        while(logging.defaultClock.getTime() - starttime) <= dura:
             pass
         #Currently only RT for catch trials will be recorded
         if target[n]==1:
@@ -129,7 +129,10 @@ def aNback (fi, nback_no, window, seq, trial_no=None, adaptive=False, duration=1
         core.wait(0.5)
     
     
-def nInterleaved (fi, nback_no, window, seq, trial_no=None, adaptive=False, duration=1.0):
+def nInterleaved (fi, nback_no, window, seq, dura, trial_no=None, adaptive=False):
+
+    #test the sequence to make sure it has enough potential corrects    
+    #sSeqChq(seq, 0.25)
 
     #data structures
     audicode=['C','D','E','F']
@@ -164,7 +167,7 @@ def nInterleaved (fi, nback_no, window, seq, trial_no=None, adaptive=False, dura
         if modality[n]==True:
             stimlist.append(visual.Rect(window,width=100.0,height=100.0,lineColor=colorcode[i],fillColor=colorcode[i], pos=(0,0)))
         else:
-            stimlist.append(sound.Sound(audicode[i],octave=4, sampleRate=44100, secs=duration,bits=8))
+            stimlist.append(sound.Sound(audicode[i],octave=4, sampleRate=44100, secs=dura,bits=8))
         n=n+1
     infolooper(infoloop,window) #present basic test info for participant (what test, etc)
     ready.draw()
@@ -184,8 +187,8 @@ def nInterleaved (fi, nback_no, window, seq, trial_no=None, adaptive=False, dura
             mod='auditory'
         starttime=window.flip()
         #each stimulus is displayed for the duration specified
-        response=event.waitKeys(maxWait=duration-(1/120.0),keyList=['l'],timeStamped=True)
-        while(logging.defaultClock.getTime() - starttime) <= duration:
+        response=event.waitKeys(maxWait=dura-(1/120.0),keyList=['l'],timeStamped=True)
+        while(logging.defaultClock.getTime() - starttime) <= dura:
             pass
         #Currently only RT for catch trials will be recorded
         if target[n]==1:
@@ -203,8 +206,11 @@ def nInterleaved (fi, nback_no, window, seq, trial_no=None, adaptive=False, dura
 #paired nback task
 #Currently auditory sequence and visual sequence are exactly the same, though it may not be the best way
 #think about this later
-def nPaired (fi, nback_no, window, seq, trial_no=None, adaptive=False, duration=1.0):
-
+def nPaired (fi, nback_no, window, seq, dura, trial_no=None, adaptive=False):
+    
+    #test the sequence to make sure it has enough potential corrects    
+    #sSeqChq(seq, 0.25)    
+    
     #data structures
     audicode=['C','D','E','F']
     colorcode=['red','blue','green','yellow']
@@ -222,7 +228,7 @@ def nPaired (fi, nback_no, window, seq, trial_no=None, adaptive=False, duration=
     #create two stimuli lists and mark down target trials
     for i in seq:
         vstimlist.append(visual.Rect(window,width=100.0,height=100.0,lineColor=colorcode[i],fillColor=colorcode[i], pos=(0,0)))
-        astimlist.append(sound.Sound(audicode[i],octave=4, sampleRate=44100, secs=duration,bits=8))
+        astimlist.append(sound.Sound(audicode[i],octave=4, sampleRate=44100, secs=dura,bits=8))
         if n > nback_no-1:
             #if the event match with n events ago (n specified by 'nback_no')
             #mark it as a target trial
@@ -243,8 +249,8 @@ def nPaired (fi, nback_no, window, seq, trial_no=None, adaptive=False, duration=
         astimlist[n].play()
         starttime=window.flip()
         #each stimulus is displayed for the duration specified
-        response=event.waitKeys(maxWait=duration-(1/120.0),keyList=['l'],timeStamped=True)
-        while(logging.defaultClock.getTime() - starttime) <= duration:
+        response=event.waitKeys(maxWait=dura-(1/120.0),keyList=['l'],timeStamped=True)
+        while(logging.defaultClock.getTime() - starttime) <= dura:
             pass
         #Currently only RT for catch trials will be recorded
         if target[n]==1:
@@ -261,7 +267,7 @@ def nPaired (fi, nback_no, window, seq, trial_no=None, adaptive=False, duration=
     
 
 #unpaired nback task
-def nUnpaired (fi, nback_no, window,  seq, trial_no=None, adaptive=False, duration=1.0):
+def nUnpaired (fi, nback_no, window,  seq, dura, trial_no=None, adaptive=False):
 
     #data structures
     audicode=['C','D','E','F']
@@ -283,7 +289,7 @@ def nUnpaired (fi, nback_no, window,  seq, trial_no=None, adaptive=False, durati
     #create two stimuli lists and mark down target trials
     for i in vseq:
         vstimlist.append(visual.Rect(window,width=100.0,height=100.0,lineColor=colorcode[i],fillColor=colorcode[i], pos=(0,0)))
-        astimlist.append(sound.Sound(audicode[aseq[n]],octave=4, sampleRate=44100, secs=duration,bits=8))
+        astimlist.append(sound.Sound(audicode[aseq[n]],octave=4, sampleRate=44100, secs=dura,bits=8))
         #the line above throws an error, needs looking over again when I'm less tired...
         if n > nback_no-1:
             #if the event match with n events ago (n specified by 'nback_no')
@@ -309,8 +315,8 @@ def nUnpaired (fi, nback_no, window,  seq, trial_no=None, adaptive=False, durati
         astimlist[n].play()
         starttime=window.flip()
         #each stimulus is displayed for the duration specified
-        response=event.waitKeys(maxWait=duration-(1/120.0),keyList=['l'],timeStamped=True)
-        while(logging.defaultClock.getTime() - starttime) <= duration:
+        response=event.waitKeys(maxWait=dura-(1/120.0),keyList=['l'],timeStamped=True)
+        while(logging.defaultClock.getTime() - starttime) <= dura:
             pass
         #Currently only RT for catch trials will be recorded
         if vtarget[n]==1 or atarget[n]==1:
