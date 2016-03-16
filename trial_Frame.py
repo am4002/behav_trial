@@ -6,11 +6,12 @@
 '''
         
 #imports
-from psychopy import visual,core, sound, event,logging,gui
-from random import randint, shuffle
+from psychopy import visual,core,event,gui
+from random import shuffle
 import csv
 from datetime import datetime
-from nback_tests import vNback, aNback, nInterleaved, nPaired, nUnpaired, infolooper
+from nback_tests import vNback, aNback, nInterleaved, nPaired, nUnpaired
+from nback_helpers import infolooper, seqGen
 
 
      
@@ -26,29 +27,7 @@ wnd = visual.Window([1024,768],fullscr=False,allowGUI=True,units='pix',color=(-1
 funcLis = [] #list to hold all testing functions
 
 
-#functions
-def seqGen(length): #this is for generating test sequences, returns a list of int in range 0-3 of desired length
-    seq = []    
-    for i in range(length):
-        seq.append(randint(0,3))
-    return seq        
-
-def sSeqChq(sq, pCorr): #checks sequences to make sure they have enough potentially correct trials
-    newSq=[] #holds the new sequence
-    i = 0 #for keeping track of how many correct trials there are
-    for j in sq:
-        if j == sq[j-2]:
-            i+=1
-    if i/len(sq) < pCorr-0.1 or i/len(sq) > pCorr+0.1:
-        mutate = randint(0,len(sq))
-    else:
-    
-    return newSq
-
-def pSeqChq(sq1, sq2, pCorrect): #
-    
-    return 0
-    
+#functions    
 def popFuncLis(lis): #creates a list of test functions shuffled in a random order.
     '''
     within here all the test functions should be appeneded to the funcLis list, ie. all the tests we will run.
@@ -90,15 +69,17 @@ if __name__ == '__main__':
     infolooper(startInfo, wnd) #loop through initial information 
     #loop that executes test functions
     for test in funcLis:
+        tSq = seqGen(30) #here is where we specify how long the test sequence is going to be
+        print "generation complete"        
         print str(test)+": test started"
-        test(outWr, 2, wnd, seqGen(2)) #filled with the generic arguments for all our test functions, change the number in seqGen() to make the list longer/shorter
+        test(outWr, 2, wnd, tSq, 0.75) #filled with the generic arguments for all our test functions, change the number in seqGen() to make the list longer/shorter
         print str(test)+": test ended"
         
     '''
     cleanup/file closing/participant thank you message
     '''
     outFile.close() #close the output file
-    thanks=visual.TextStim(wnd,'thank you for your participation, all tests are concluded?', color=(1.0,1.0,1.0)) #thank the subject for their participation
+    thanks=visual.TextStim(wnd,'thank you for your participation, all tests are concluded', color=(1.0,1.0,1.0)) #thank the subject for their participation
     thanks.draw()
     wnd.flip()
     event.waitKeys(keyList=['return'])    
