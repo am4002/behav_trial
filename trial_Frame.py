@@ -1,30 +1,26 @@
+#!/usr/bin/env python
 '''
     framework for running behavioral N-back tests  
     
-    TODO:
+    UPDATE:
+        3.14 new gui
     
 '''
         
 #imports
-from psychopy import visual,core, sound, event,logging,gui
+from psychopy import visual,core,gui,event
 from random import randint, shuffle
 import csv
 from datetime import datetime
-from nback_tests import vNback, aNback, nInterleaved, nPaired, nUnpaired, infolooper
+from nback_tests import vNback, aNback, withinInterleaved, betweenInterleaved, nPaired, nUnpaired, vDistractor, aDistractor, infolooper
 
 
      
 #structures
-     
-#list that holds introductory information for the subject
-startInfo = ['press return to continue',
-             'welcome subject '
-             'in this experiment you will preform a series of N-back tests that involve visual and auditory components',
-             'each test is prefaced by a short explanation',
-             'if you have any remaining questions, or would no longer like to take part in this pilot study, please notify an experimenter now']
+
+
 wnd = visual.Window([1024,768],fullscr=False,allowGUI=True,units='pix',color=(-1,-1,-1)) #psychopy window
 funcLis = [] #list to hold all testing functions
-
 
 #functions
 def seqGen(length): #this is for generating test sequences, returns a list of int in range 0-3 of desired length
@@ -33,21 +29,6 @@ def seqGen(length): #this is for generating test sequences, returns a list of in
         seq.append(randint(0,3))
     return seq        
 
-def sSeqChq(sq, pCorr): #checks sequences to make sure they have enough potentially correct trials
-    newSq=[] #holds the new sequence
-    i = 0 #for keeping track of how many correct trials there are
-    for j in sq:
-        if j == sq[j-2]:
-            i+=1
-    if i/len(sq) < pCorr-0.1 or i/len(sq) > pCorr+0.1:
-        mutate = randint(0,len(sq))
-    else:
-    
-    return newSq
-
-def pSeqChq(sq1, sq2, pCorrect): #
-    
-    return 0
     
 def popFuncLis(lis): #creates a list of test functions shuffled in a random order.
     '''
@@ -56,19 +37,19 @@ def popFuncLis(lis): #creates a list of test functions shuffled in a random orde
     '''
     lis.append(vNback)
     lis.append(aNback)
-    lis.append(nInterleaved)
+    lis.append(withinInterleaved)
+    lis.append(betweenInterleaved)
     lis.append(nPaired)
     lis.append(nUnpaired)
+    lis.append(vDistractor)
+    lis.append(aDistractor)
         
     shuffle(lis) #randomize order of tests performed
+    return 0
 
 
 #main routine
 if __name__ == '__main__':
-    '''
-    file output setup, creates a dictionary that holds participant information and timestamp,
-    and creates an output writer that stores participant score.
-    '''    
     data={}
     data['expname']='N-Back'
     data['expdate']=datetime.now().strftime('%Y%m%d_%H%M')
@@ -77,31 +58,32 @@ if __name__ == '__main__':
     if not dlg.OK:
         core.quit()
         
-    outName='P_%s_%s.csv'%(data['participantid'],data['expdate'])
+    outName='P%s_%s.csv'%(data['participantid'],data['expdate'])
     outFile = open(outName, 'wb')
-    outWr = csv.writer(outFile)
-    
-    
-    '''
-    loop for presenting each test to participants
-    '''
+    outWr = csv.writer(outFile) # a .csv file with that name. Could be improved, but gives us some control
     popFuncLis(funcLis) #populate list of test functions 
-    wnd.flip() #initialize window    
+    wnd.flip() #initialize window 
+    
+    #list that holds introductory information for the subject
+    startInfo = ['Press return to continue',
+             'Welcome subject '+data['participantid'],
+             'In this experiment you will preform a series of N-back tests that involve visual and auditory components',
+             'Each test is prefaced by a short explanation',
+             'If you have any remaining questions, or would no longer like to take part in this pilot study, please notify an experimenter now']
     infolooper(startInfo, wnd) #loop through initial information 
     #loop that executes test functions
     for test in funcLis:
         print str(test)+": test started"
-        test(outWr, 2, wnd, seqGen(2)) #filled with the generic arguments for all our test functions, change the number in seqGen() to make the list longer/shorter
-        print str(test)+": test ended"
-        
-    '''
-    cleanup/file closing/participant thank you message
-    '''
+        test(outWr, 2, wnd, seqGen(3)) #filled with the generic arguments for all our test functions, change the number in seqGen() to make the list longer/shorter
+        print str(test)+": test ended"        
     outFile.close() #close the output file
-    thanks=visual.TextStim(wnd,'thank you for your participation, all tests are concluded?', color=(1.0,1.0,1.0)) #thank the subject for their participation
-    thanks.draw()
+    ready=visual.TextStim(wnd,'Thank you for your participation, all tests are concluded?', color=(1.0,1.0,1.0)) #thank the subject for their participation
+    ready.draw()
     wnd.flip()
     event.waitKeys(keyList=['return'])    
     wnd.close()     #close the psychopy windo
     print "all tests concluded"    
+    
+
+    
     
