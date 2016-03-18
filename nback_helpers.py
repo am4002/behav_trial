@@ -99,7 +99,6 @@ def pTrainer(window):
     infoloop1=['Welcome to the Association Trainer',
              'You will see/hear a series of PAIRED colour squares and audio tones',
              'Try your best to remember them',
-             'You will be tested on how well you remember them later',
              'Press return/enter to continue']
     
     infoloop2=['You have been presented with the 4 pairs sequentially',
@@ -146,9 +145,9 @@ def pTrainer(window):
         vstimlist[i].draw()
         window.flip()
         astimlist[i].play()
-        core.wait(0.75)
+        core.wait(1.0)
         window.flip()
-        core.wait(0.2)
+        core.wait(1.0)
     
 #Ask if they want to rewatch the associations or proceed to n-back task
     s1.draw()
