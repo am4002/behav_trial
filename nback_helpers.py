@@ -162,7 +162,6 @@ def pTrainer(window):
             core.wait(1.0)
             window.flip()
             core.wait(1.0)
-        infolooper(infoloop3,window)
         s1.draw()
         window.flip()
         response=event.waitKeys(keyList=['q','l'])
