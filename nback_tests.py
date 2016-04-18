@@ -69,7 +69,7 @@ def vNback (fi, nback_no, window, seq, dura, trial_no=None, adaptive=False): #vi
         window.flip()
         core.wait(0.3)
     
-    fi.writerow(['Testing sequence: ', seq])
+    #fi.writerow(['Testing sequence: ', seq])
     fi.writerow([])
     
 def aNback (fi, nback_no, window, seq, dura, trial_no=None, adaptive=False):
@@ -124,7 +124,7 @@ def aNback (fi, nback_no, window, seq, dura, trial_no=None, adaptive=False):
         n = n+1
         window.flip()
         core.wait(0.5)
-    fi.writerow(['Testing sequence ', seq])
+    #fi.writerow(['Testing sequence ', seq])
     fi.writerow([])
 
     
@@ -198,7 +198,7 @@ def betweenInterleaved (fi, nback_no, window, seq, dura, trial_no=None, adaptive
         window.flip()
         core.wait(0.5)
     
-    fi.writerow(['Testing sequence ', seq])
+    #fi.writerow(['Testing sequence ', seq])
     fi.writerow([])
 
 
@@ -262,7 +262,7 @@ def nPaired (fi, nback_no, window, seq, dura, trial_no=None, adaptive=False):
         n = n+1
         core.wait(0.5)
     
-    fi.writerow(['Testing sequence ', seq])
+    #fi.writerow(['Testing sequence ', seq])
     fi.writerow([])
 
 #unpaired nback task
@@ -338,8 +338,8 @@ def nUnpaired (fi, nback_no, window,  seq, dura, trial_no=None, adaptive=False):
         fi.writerow(['%s, %d, %s, %s, %s\n'%('unpaired '+str(mod), n+1, target, str(hit), str(time))])
         n = n+1
         core.wait(0.5)
-    fi.writerow(['Visual sequence ', vseq])
-    fi.writerow(['Auditory sequence ', aseq])
+    #fi.writerow(['Visual sequence ', vseq])
+    #fi.writerow(['Auditory sequence ', aseq])
     fi.writerow([])
 
 
@@ -409,8 +409,8 @@ def vDistractor (fi, nback_no, window,  seq, dura, trial_no=None, adaptive=False
         fi.writerow(['%s, %d, %s, %s, %s\n'%('vDistractor ', n+1, target, str(hit), str(time))])
         n = n+1
         core.wait(0.5)
-    fi.writerow(['Visual sequence ', vseq])
-    fi.writerow(['Auditory sequence ', aseq])
+    #fi.writerow(['Visual sequence ', vseq])
+    #fi.writerow(['Auditory sequence ', aseq])
     fi.writerow([])
    
    
@@ -480,8 +480,8 @@ def aDistractor (fi, nback_no, window,  seq, dura, trial_no=None, adaptive=False
         fi.writerow(['%s, %d, %s, %s, %s\n'%('aDistractor ', n+1, target, str(hit), str(time))])
         n = n+1
         core.wait(0.5)
-    fi.writerow(['Visual sequence ', vseq])
-    fi.writerow(['Auditory sequence ', aseq])
+    #fi.writerow(['Visual sequence ', vseq])
+    #fi.writerow(['Auditory sequence ', aseq])
     fi.writerow([])
    
    
@@ -556,5 +556,5 @@ def withinInterleaved (fi, nback_no, window, seq, dura, trial_no=None, adaptive=
         window.flip()
         core.wait(0.5)
     
-    fi.writerow(['Testing sequence ', seq])
+    #fi.writerow(['Testing sequence ', seq])
     fi.writerow([])

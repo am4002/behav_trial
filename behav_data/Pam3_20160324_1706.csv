@@ -1,0 +1,499 @@
+"visual, 1, False, None, None
+"
+"visual, 2, False, None, None
+"
+"visual, 3, False, None, None
+"
+"visual, 4, True, True, 0.355885982513
+"
+"visual, 5, False, None, None
+"
+"visual, 6, False, None, None
+"
+"visual, 7, False, False, 0.665060043335
+"
+"visual, 8, False, None, None
+"
+"visual, 9, False, None, None
+"
+"visual, 10, True, True, 0.573761940002
+"
+"visual, 11, False, None, None
+"
+"visual, 12, True, None, None
+"
+"visual, 13, True, True, 0.0749020576477
+"
+"visual, 14, False, None, None
+"
+"visual, 15, False, None, None
+"
+"visual, 16, False, None, None
+"
+"visual, 17, False, None, None
+"
+"visual, 18, False, None, None
+"
+"visual, 19, False, None, None
+"
+"visual, 20, False, None, None
+"
+"visual, 21, False, None, None
+"
+"visual, 22, False, None, None
+"
+"visual, 23, True, None, None
+"
+"visual, 24, True, None, None
+"
+"visual, 25, False, None, None
+"
+"visual, 26, True, True, 0.603396177292
+"
+"visual, 27, False, None, None
+"
+"visual, 28, True, None, None
+"
+"visual, 29, False, None, None
+"
+"visual, 30, False, None, None
+"
+Testing sequence: ,"[3, 2, 2, 2, 0, 0, 2, 1, 1, 1, 3, 1, 3, 2, 2, 3, 0, 1, 3, 2, 1, 0, 1, 0, 0, 0, 2, 0, 0, 3]"
+
+"vDistractor , 1, False, None, None
+"
+"vDistractor , 2, False, None, None
+"
+"vDistractor , 3, True, True, 0.480088949203
+"
+"vDistractor , 4, False, None, None
+"
+"vDistractor , 5, False, None, None
+"
+"vDistractor , 6, True, True, 0.724999904633
+"
+"vDistractor , 7, True, None, None
+"
+"vDistractor , 8, False, False, 0.157279968262
+"
+"vDistractor , 9, False, None, None
+"
+"vDistractor , 10, False, None, None
+"
+"vDistractor , 11, True, True, 0.690126180649
+"
+"vDistractor , 12, False, None, None
+"
+"vDistractor , 13, False, None, None
+"
+"vDistractor , 14, True, None, None
+"
+"vDistractor , 15, True, True, 0.507190942764
+"
+"vDistractor , 16, False, None, None
+"
+"vDistractor , 17, False, None, None
+"
+"vDistractor , 18, False, None, None
+"
+"vDistractor , 19, True, True, 0.724519014359
+"
+"vDistractor , 20, False, None, None
+"
+"vDistractor , 21, True, None, None
+"
+"vDistractor , 22, False, None, None
+"
+"vDistractor , 23, False, None, None
+"
+"vDistractor , 24, False, None, None
+"
+"vDistractor , 25, True, True, 0.661913871765
+"
+"vDistractor , 26, False, None, None
+"
+"vDistractor , 27, False, None, None
+"
+"vDistractor , 28, False, None, None
+"
+"vDistractor , 29, False, None, None
+"
+"vDistractor , 30, True, None, None
+"
+Visual sequence ,"[3, 2, 3, 1, 0, 1, 0, 2, 1, 1, 1, 2, 2, 2, 2, 0, 3, 2, 3, 1, 3, 2, 2, 0, 2, 2, 3, 1, 2, 1]"
+Auditory sequence ,"[0, 0, 3, 2, 2, 1, 3, 3, 1, 0, 1, 2, 2, 2, 2, 1, 3, 2, 3, 3, 1, 1, 2, 2, 1, 2, 0, 1, 2, 2]"
+
+"unpaired None, 1, False, None, None
+"
+"unpaired None, 2, False, None, None
+"
+"unpaired None, 3, False, None, None
+"
+"unpaired visual, 4, True, True, 0.610007762909
+"
+"unpaired None, 5, False, None, None
+"
+"unpaired visual, 6, True, None, None
+"
+"unpaired auditory, 7, True, None, None
+"
+"unpaired visual, 8, True, True, 0.0580611228943
+"
+"unpaired auditory, 9, True, None, None
+"
+"unpaired visual, 10, True, True, 0.667922019958
+"
+"unpaired None, 11, False, None, None
+"
+"unpaired visual, 12, True, True, 0.220420837402
+"
+"unpaired visual, 13, True, True, 0.712507963181
+"
+"unpaired None, 14, False, None, None
+"
+"unpaired None, 15, False, None, None
+"
+"unpaired auditory, 16, True, None, None
+"
+"unpaired visual, 17, True, None, None
+"
+"unpaired None, 18, False, None, None
+"
+"unpaired None, 19, False, None, None
+"
+"unpaired None, 20, False, None, None
+"
+"unpaired None, 21, False, None, None
+"
+"unpaired None, 22, False, None, None
+"
+"unpaired None, 23, False, None, None
+"
+"unpaired auditory, 24, True, None, None
+"
+"unpaired visual, 25, True, None, None
+"
+"unpaired auditory, 26, True, None, None
+"
+"unpaired None, 27, False, None, None
+"
+"unpaired None, 28, False, False, 0.648608922958
+"
+"unpaired visual, 29, True, None, None
+"
+"unpaired None, 30, False, None, None
+"
+Visual sequence ,"[1, 2, 0, 2, 2, 2, 0, 2, 3, 2, 2, 2, 2, 1, 0, 3, 0, 0, 1, 2, 0, 0, 3, 1, 3, 3, 0, 1, 0, 2]"
+Auditory sequence ,"[2, 2, 3, 2, 0, 0, 0, 2, 0, 2, 2, 1, 3, 2, 1, 2, 0, 3, 2, 0, 0, 1, 2, 1, 3, 1, 0, 3, 0, 2]"
+
+"auditory, 1, False, None, None
+"
+"auditory, 2, False, None, None
+"
+"auditory, 3, True, None, None
+"
+"auditory, 4, False, None, None
+"
+"auditory, 5, False, None, None
+"
+"auditory, 6, False, None, None
+"
+"auditory, 7, False, None, None
+"
+"auditory, 8, False, None, None
+"
+"auditory, 9, False, None, None
+"
+"auditory, 10, False, None, None
+"
+"auditory, 11, False, None, None
+"
+"auditory, 12, False, None, None
+"
+"auditory, 13, False, None, None
+"
+"auditory, 14, False, None, None
+"
+"auditory, 15, False, False, 0.521581888199
+"
+"auditory, 16, True, None, None
+"
+"auditory, 17, False, None, None
+"
+"auditory, 18, False, None, None
+"
+"auditory, 19, True, None, None
+"
+"auditory, 20, False, None, None
+"
+"auditory, 21, False, None, None
+"
+"auditory, 22, False, None, None
+"
+"auditory, 23, False, None, None
+"
+"auditory, 24, False, False, 0.0802311897278
+"
+"auditory, 25, False, None, None
+"
+"auditory, 26, False, None, None
+"
+"auditory, 27, False, None, None
+"
+"auditory, 28, False, None, None
+"
+"auditory, 29, False, None, None
+"
+"auditory, 30, False, None, None
+"
+Testing sequence ,"[3, 1, 3, 0, 0, 1, 2, 0, 1, 1, 3, 2, 0, 1, 3, 1, 2, 0, 2, 3, 3, 2, 0, 3, 3, 1, 2, 0, 1, 1]"
+
+"betweenInterleaved visual, 1, False, None, None
+"
+"betweenInterleaved auditory, 2, False, None, None
+"
+"betweenInterleaved visual, 3, False, None, None
+"
+"betweenInterleaved visual, 4, False, None, None
+"
+"betweenInterleaved visual, 5, False, None, None
+"
+"betweenInterleaved visual, 6, False, None, None
+"
+"betweenInterleaved visual, 7, False, None, None
+"
+"betweenInterleaved auditory, 8, True, None, None
+"
+"betweenInterleaved auditory, 9, True, None, None
+"
+"betweenInterleaved visual, 10, True, None, None
+"
+"betweenInterleaved visual, 11, False, None, None
+"
+"betweenInterleaved auditory, 12, False, None, None
+"
+"betweenInterleaved auditory, 13, False, None, None
+"
+"betweenInterleaved auditory, 14, False, None, None
+"
+"betweenInterleaved visual, 15, True, None, None
+"
+"betweenInterleaved visual, 16, True, None, None
+"
+"betweenInterleaved visual, 17, False, False, 0.365565061569
+"
+"betweenInterleaved visual, 18, False, None, None
+"
+"betweenInterleaved auditory, 19, False, None, None
+"
+"betweenInterleaved auditory, 20, True, None, None
+"
+"betweenInterleaved visual, 21, False, None, None
+"
+"betweenInterleaved visual, 22, True, None, None
+"
+"betweenInterleaved visual, 23, False, None, None
+"
+"betweenInterleaved visual, 24, False, None, None
+"
+"betweenInterleaved auditory, 25, True, True, 0.0862529277802
+"
+"betweenInterleaved visual, 26, False, None, None
+"
+"betweenInterleaved auditory, 27, False, None, None
+"
+"betweenInterleaved auditory, 28, False, None, None
+"
+"betweenInterleaved auditory, 29, False, None, None
+"
+"betweenInterleaved visual, 30, True, None, None
+"
+Testing sequence ,"[1, 3, 2, 0, 0, 1, 3, 1, 3, 1, 2, 2, 1, 1, 1, 1, 3, 2, 1, 2, 0, 2, 3, 0, 3, 1, 1, 0, 3, 0]"
+
+"paired, 1, False, None, None
+"
+"paired, 2, False, None, None
+"
+"paired, 3, True, True, 0.565323114395
+"
+"paired, 4, False, False, 0.529386043549
+"
+"paired, 5, False, None, None
+"
+"paired, 6, True, None, None
+"
+"paired, 7, True, True, 0.670425891876
+"
+"paired, 8, False, None, None
+"
+"paired, 9, False, None, None
+"
+"paired, 10, False, None, None
+"
+"paired, 11, False, None, None
+"
+"paired, 12, True, True, 0.579569816589
+"
+"paired, 13, True, True, 0.592038154602
+"
+"paired, 14, False, None, None
+"
+"paired, 15, False, None, None
+"
+"paired, 16, True, None, None
+"
+"paired, 17, False, None, None
+"
+"paired, 18, False, None, None
+"
+"paired, 19, False, None, None
+"
+"paired, 20, False, None, None
+"
+"paired, 21, True, None, None
+"
+"paired, 22, False, None, None
+"
+"paired, 23, True, True, 0.66648888588
+"
+"paired, 24, False, None, None
+"
+"paired, 25, False, None, None
+"
+"paired, 26, False, None, None
+"
+"paired, 27, False, None, None
+"
+"paired, 28, False, None, None
+"
+"paired, 29, False, None, None
+"
+"paired, 30, False, None, None
+"
+Testing sequence ,"[3, 0, 3, 3, 2, 3, 2, 1, 1, 3, 3, 3, 3, 1, 2, 1, 1, 3, 2, 1, 2, 2, 2, 0, 0, 3, 1, 2, 0, 3]"
+
+"aDistractor , 1, False, None, None
+"
+"aDistractor , 2, False, None, None
+"
+"aDistractor , 3, True, None, None
+"
+"aDistractor , 4, True, True, 0.67445397377
+"
+"aDistractor , 5, False, None, None
+"
+"aDistractor , 6, True, None, None
+"
+"aDistractor , 7, False, None, None
+"
+"aDistractor , 8, False, None, None
+"
+"aDistractor , 9, True, True, 0.0480439662933
+"
+"aDistractor , 10, True, None, None
+"
+"aDistractor , 11, True, None, None
+"
+"aDistractor , 12, False, None, None
+"
+"aDistractor , 13, False, None, None
+"
+"aDistractor , 14, False, None, None
+"
+"aDistractor , 15, True, None, None
+"
+"aDistractor , 16, True, None, None
+"
+"aDistractor , 17, False, None, None
+"
+"aDistractor , 18, False, None, None
+"
+"aDistractor , 19, False, None, None
+"
+"aDistractor , 20, False, None, None
+"
+"aDistractor , 21, False, None, None
+"
+"aDistractor , 22, False, None, None
+"
+"aDistractor , 23, False, None, None
+"
+"aDistractor , 24, False, None, None
+"
+"aDistractor , 25, False, None, None
+"
+"aDistractor , 26, True, None, None
+"
+"aDistractor , 27, False, None, None
+"
+"aDistractor , 28, True, None, None
+"
+"aDistractor , 29, False, None, None
+"
+"aDistractor , 30, True, None, None
+"
+Visual sequence ,"[1, 3, 2, 1, 1, 1, 3, 1, 2, 0, 3, 3, 3, 1, 2, 2, 1, 2, 2, 3, 3, 0, 0, 3, 1, 2, 2, 1, 1, 3]"
+Auditory sequence ,"[2, 3, 2, 3, 1, 3, 3, 2, 3, 2, 3, 3, 1, 1, 1, 1, 2, 2, 0, 3, 1, 2, 2, 1, 0, 1, 3, 1, 0, 1]"
+
+"withinInterleaved auditory, 1, False, None, None
+"
+"withinInterleaved visual, 2, False, None, None
+"
+"withinInterleaved visual, 3, False, None, None
+"
+"withinInterleaved auditory, 4, False, None, None
+"
+"withinInterleaved visual, 5, True, None, None
+"
+"withinInterleaved visual, 6, False, False, 0.449285030365
+"
+"withinInterleaved visual, 7, True, True, 0.55753493309
+"
+"withinInterleaved auditory, 8, False, None, None
+"
+"withinInterleaved visual, 9, False, None, None
+"
+"withinInterleaved auditory, 10, False, False, 0.0180659294128
+"
+"withinInterleaved auditory, 11, False, None, None
+"
+"withinInterleaved auditory, 12, False, None, None
+"
+"withinInterleaved auditory, 13, False, None, None
+"
+"withinInterleaved auditory, 14, False, None, None
+"
+"withinInterleaved auditory, 15, True, None, None
+"
+"withinInterleaved auditory, 16, False, None, None
+"
+"withinInterleaved visual, 17, False, None, None
+"
+"withinInterleaved auditory, 18, False, None, None
+"
+"withinInterleaved visual, 19, False, None, None
+"
+"withinInterleaved auditory, 20, False, None, None
+"
+"withinInterleaved auditory, 21, False, None, None
+"
+"withinInterleaved auditory, 22, False, None, None
+"
+"withinInterleaved auditory, 23, False, None, None
+"
+"withinInterleaved visual, 24, False, None, None
+"
+"withinInterleaved auditory, 25, True, None, None
+"
+"withinInterleaved visual, 26, False, None, None
+"
+"withinInterleaved visual, 27, False, None, None
+"
+"withinInterleaved auditory, 28, False, None, None
+"
+"withinInterleaved auditory, 29, False, None, None
+"
+"withinInterleaved auditory, 30, False, None, None
+"
+Testing sequence ,"[2, 0, 0, 1, 0, 2, 0, 0, 2, 2, 3, 0, 1, 1, 1, 3, 0, 0, 1, 3, 2, 1, 3, 3, 3, 1, 1, 2, 3, 0]"
+
