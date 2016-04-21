@@ -25,7 +25,7 @@ def vNback (fi, nback_no, window, seq, dura, trial_no=None, adaptive=False): #vi
     infoloop=['Press return/enter to continue',
              'This is the visual 2-back test',
              'You will see a series of coloured squares',
-             'Press L if the colour of a square matches the colour of a square two steps back']
+             'Press L if the square matches the colour of the square two steps back']
     stimlist=[]
     target=[0,0]
     n=0
@@ -81,8 +81,8 @@ def aNback (fi, nback_no, window, seq, dura, trial_no=None, adaptive=False):
     cross=visual.TextStim(window,'+',color='white')
     infoloop=['Press return/enter to continue',
              'This is the auditory 2-back test',
-             'You will see a series of audio tones',
-             'Press L if the tone played matches the tone two steps back']
+             'You will hear a series of auditory tones',
+             'Press L if the current tone matches the tone two steps back']
     stimlist=[]
     target=[0,0]
     n=0
@@ -137,8 +137,9 @@ def betweenInterleaved (fi, nback_no, window, seq, dura, trial_no=None, adaptive
     ready=visual.TextStim(window,'ready?', color=(1.0,1.0,1.0))
     cross=visual.TextStim(window,'+',color='white')
     infoloop=['Press return/enter to continue',
-             'This is the bewteen-modality interleaved 2-back test',
-             'You will see a series that contains both audio tones and coloured squares SEPARATELY',
+             'This is a mixed 2-back test',
+             'You will see a series that contains both auditory tones and coloured squares SEPARATELY',
+             'The tones and colours are associated, so a tone can match to a colour', 
              'Press L if the tone played matches the associated colour two steps back, or vice versa']
     stimlist=[]
     target=[0,0];modality=[]
@@ -214,7 +215,7 @@ def nPaired (fi, nback_no, window, seq, dura, trial_no=None, adaptive=False):
     ready=visual.TextStim(window,'ready?', color=(1.0,1.0,1.0))
     infoloop=['Press return/enter to continue',
              'This is the paired 2-back test',
-             'You will see a series that contains both audio tones and coloured squares together',
+             'You will see a series that contains both audio tones and coloured squares TOGETHER',
              'In this test, the same colour/tone pair is always presented together',
              'Press L if the colour/tone pair matches the pair two steps back']
     vstimlist=[];astimlist=[]
@@ -278,9 +279,9 @@ def nUnpaired (fi, nback_no, window,  seq, dura, trial_no=None, adaptive=False):
     ready=visual.TextStim(window,'ready?', color=(1.0,1.0,1.0))
     infoloop=['Press return/enter to continue',
              'This is the unpaired 2-back test',
-             'You will see a series that contains both audio tones and coloured squares together',
-             'In this test, the same colours and tones are NOT paired and are entirely unrelated to eachother, although they are presented at the same time',
-             'Press L if either the colour OR tone OR both matches the with the same two steps back']
+             'You will see a series that contains both audio tones and coloured squares TOGETHER',
+             'In this test the same colours and tones are NOT or related, although they are presented at the same time',
+             'Press L if either the colour OR tone matches the with the same two steps back']
     vstimlist=[];astimlist=[]
     vtarget=[0,0];atarget=[0,0]
     n=0
@@ -356,9 +357,9 @@ def vDistractor (fi, nback_no, window,  seq, dura, trial_no=None, adaptive=False
     ready=visual.TextStim(window,'ready?', color=(1.0,1.0,1.0))
     infoloop=['Press return/enter to continue',
              'This is the visual distractor 2-back test',
-             'You will see a series that contains both audio tones and coloured squares together',
-             'In this test, please only pay attention to the visual colour squares, and ignore the tones',
-             'Press press L if the colour matches with the one two steps back']
+             'You will see a series that contains both audio tones and coloured squares TOGETHER',
+             'In this test, please only pay attention to the visual colour squares, and IGNORE the tones',
+             'Press L if the COLOUR matches the one two steps back']
     vstimlist=[];astimlist=[]
     vtarget=[0,0];atarget=[0,0]
     n=0
@@ -427,9 +428,9 @@ def aDistractor (fi, nback_no, window,  seq, dura, trial_no=None, adaptive=False
     ready=visual.TextStim(window,'ready?', color=(1.0,1.0,1.0))
     infoloop=['Press return/enter to continue',
              'This is the auditory distractor 2-back test',
-             'You will see a series that contains both audio tones and coloured squares together',
-             'In this test, please only pay attention to the audio tones, and ignore the coloured squares',
-             'Press press L if the tone matches with the one two steps back']
+             'You will see a series that contains both audio tones and coloured squares TOGETHER',
+             'In this test, please only pay attention to the audio tones, and IGNORE the coloured squares',
+             'Press L if the TONE matches the one two steps back']
     vstimlist=[];astimlist=[]
     vtarget=[0,0];atarget=[0,0]
     n=0
@@ -495,7 +496,7 @@ def withinInterleaved (fi, nback_no, window, seq, dura, trial_no=None, adaptive=
     ready=visual.TextStim(window,'ready?', color=(1.0,1.0,1.0))
     cross=visual.TextStim(window,'+',color='white')
     infoloop=['Press return/enter to continue',
-             'This is the within-modality interleaved 2-back test',
+             'This is a mixed 2-back test',
              'You will see a series that contains both audio tones and coloured squares SEPARATELY',
              'Press L if the tone played matches the tone two steps back, or if the colour matches the colour two steps back']
     stimlist=[]
