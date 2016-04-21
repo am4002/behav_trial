@@ -21,7 +21,7 @@ def vNback (fi, nback_no, window, seq, dura, trial_no=None, adaptive=False): #vi
     #data structures
     colorcode=['red','blue','green','yellow']
     trial_no=len(seq)
-    ready=visual.TextStim(window,'ready?', color=(1.0,1.0,1.0))
+    ready=visual.TextStim(window,'Ready?', color=(1.0,1.0,1.0))
     infoloop=['Press return/enter to continue',
              'This is the visual 2-back test',
              'You will see a series of coloured squares',
