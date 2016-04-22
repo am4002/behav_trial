@@ -5,28 +5,18 @@
     TODO:
         
     Updated date:
-        April 19
+        April 22
     CHANGED:
         add MEG trigger and receiving response
 """
 #imports
 from psychopy import visual, sound, core, event,logging
 from random import randint, shuffle
-from nback_helpers import infolooper
+from nback_helpers import infolooper, quitTest
 import numpy as np
 import parallel #NB not psyhopy parallel
 
 
-'''
-pport_resp = parallel.Parallel('/dev/parport1') #right hand box
-pport_resp.setDataDir(0) #0=read
-pport_resp.getData() #getData is the basic read command
-    
-
-pport_trig = parallel.Parallel('/dev/parport0')    
-pport_trig.setDataDir(1) #1=write
-pport_trig.setData(0) #setData is the basic write command with a value
-'''
 
 #Global variables
 colorcode=['red','blue','green','yellow']
@@ -71,6 +61,8 @@ def vNback (fi, nback_no, window, seq, dura, inMEG=False, trial_no=None, adaptiv
     trial_no=len(seq)
     ready=visual.TextStim(window,'ready?', color=(1.0,1.0,1.0))
     cross=visual.TextStim(window,'+',color='white')
+    rest=visual.TextStim(window,'Well done! Have a break',color='white')
+
     infoloop=['Press return/enter to continue',
              'This is the visual 2-back test',
              'You will see a series of coloured squares',
@@ -97,8 +89,9 @@ def vNback (fi, nback_no, window, seq, dura, inMEG=False, trial_no=None, adaptiv
     event.waitKeys(keyList=['return'])
     # to give feedback on percentage correct, miss, false hit
     per_corr=[target.count(1),0,0]
-    #draw stimuli and record response time
     cross.setAutoDraw(True) 
+        
+    #draw stimuli and record response time
     for n, trial in enumerate(stimlist):
         response=None; hit=None; time=None
         trial.draw()
@@ -156,6 +149,28 @@ def vNback (fi, nback_no, window, seq, dura, inMEG=False, trial_no=None, adaptiv
             pport_trig.setData( 0)#set all pin low
             print 'trigger set DOWN'
         core.wait(0.5)
+        #q to quit        
+        if event.getKeys(keyList=['q' ,'escape']):
+            cross.setAutoDraw(False)
+            sure=visual.TextStim(window,'Do you want to quit?',color='white')
+            sure.draw()
+            window.flip()
+            pressed=event.waitKeys(keyList=None)
+            if pressed[0]=='return':                
+                window.close()
+                core.quit()
+            else:
+                cross.setAutoDraw(True)
+                pass;
+        if n%50==0 and n!=0:
+            cross.setAutoDraw(False)
+            rest.draw()
+            window.flip()
+            core.wait(5.0)
+            ready.draw()
+            window.flip()
+            event.waitKeys(keyList=['return'])
+            cross.setAutoDraw(True)
 
     #feedback to the participants
     feedback=visual.TextStim(window,'Block completed\nYour result: '+
@@ -176,6 +191,8 @@ def aNback (fi, nback_no, window, seq, dura, inMEG=False,trial_no=None, adaptive
     trial_no=len(seq)
     ready=visual.TextStim(window,'ready?', color=(1.0,1.0,1.0))
     cross=visual.TextStim(window,'+',color='white')
+    rest=visual.TextStim(window,'Well done! Have a break',color='white')
+
     infoloop=['Press return/enter to continue',
              'This is the auditory 2-back test',
              'You will see a series of audio tones',
@@ -257,7 +274,28 @@ def aNback (fi, nback_no, window, seq, dura, inMEG=False,trial_no=None, adaptive
             pport_trig.setData( 0) #set all pin low
             print 'trigger set DOWN'
         core.wait(0.5)
-
+        #q to quit        
+        if event.getKeys(keyList=['q' ,'escape']):
+            cross.setAutoDraw(False)
+            sure=visual.TextStim(window,'Do you want to quit?',color='white')
+            sure.draw()
+            window.flip()
+            pressed=event.waitKeys(keyList=None)
+            if pressed[0]=='return':                
+                window.close()
+                core.quit()
+            else:
+                cross.setAutoDraw(True)
+                pass;        
+        if n%50==0:
+            cross.setAutoDraw(False)
+            rest.draw()
+            window.flip()
+            core.wait(5.0)
+            ready.draw()
+            window.flip()
+            event.waitKeys(keyList=['return'])
+            cross.setAutoDraw(True)
         
     feedback=visual.TextStim(window,'Block completed\nYour result: '+
                              str(per_corr[1])+' out of '+str(per_corr[0])+' correct\n'+
@@ -281,6 +319,8 @@ def nPaired (fi, nback_no, window, seq, dura, inMEG=False, trial_no=None, adapti
     trial_no=len(seq)
     ready=visual.TextStim(window,'ready?', color=(1.0,1.0,1.0))
     cross=visual.TextStim(window,'+',color='white')
+    rest=visual.TextStim(window,'Well done! Have a break',color='white')
+
     infoloop=['Press return/enter to continue',
              'This is the paired 2-back test',
              'You will see a series that contains both audio tones and coloured squares together',
@@ -376,7 +416,28 @@ def nPaired (fi, nback_no, window, seq, dura, inMEG=False, trial_no=None, adapti
             pport_trig.setData( 0)#set all pin low
             #print 'trigger set DOWN'
         core.wait(0.5)
-
+        #q to quit        
+        if event.getKeys(keyList=['q' ,'escape']):
+            cross.setAutoDraw(False)
+            sure=visual.TextStim(window,'Do you want to quit?',color='white')
+            sure.draw()
+            window.flip()
+            pressed=event.waitKeys(keyList=None)
+            if pressed[0]=='return':                
+                window.close()
+                core.quit()
+            else:
+                cross.setAutoDraw(True)
+                pass;        
+        if n%50==0:
+            cross.setAutoDraw(False)
+            rest.draw()
+            window.flip()
+            core.wait(5.0)
+            ready.draw()
+            window.flip()
+            event.waitKeys(keyList=['return'])
+            cross.setAutoDraw(True)
             
     feedback=visual.TextStim(window,'Block completed\nYour result: '+
                              str(per_corr[1])+' out of '+str(per_corr[0])+' correct\n'+
@@ -522,6 +583,8 @@ def vDistractor (fi, nback_no, window,  seq, dura, inMEG=False,trial_no=None, ad
     trial_no=len(vseq)
     ready=visual.TextStim(window,'ready?', color=(1.0,1.0,1.0))
     cross=visual.TextStim(window,'+',color='white')
+    rest=visual.TextStim(window,'Well done! Have a break',color='white')
+
     infoloop=['Press return/enter to continue',
              'This is the visual distractor 2-back test',
              'You will see a series that contains both audio tones and coloured squares together',
@@ -611,7 +674,28 @@ def vDistractor (fi, nback_no, window,  seq, dura, inMEG=False,trial_no=None, ad
             pport_trig.setData( 0)#set all pin low
             #print 'trigger set DOWN'
         core.wait(0.5)
-
+        #q to quit        
+        if event.getKeys(keyList=['q' ,'escape']):
+            cross.setAutoDraw(False)
+            sure=visual.TextStim(window,'Do you want to quit?',color='white')
+            sure.draw()
+            window.flip()
+            pressed=event.waitKeys(keyList=None)
+            if pressed[0]=='return':                
+                window.close()
+                core.quit()
+            else:
+                cross.setAutoDraw(True)
+                pass;        
+        if n%50==0:
+            cross.setAutoDraw(False)
+            rest.draw()
+            window.flip()
+            core.wait(5.0)
+            ready.draw()
+            window.flip()
+            event.waitKeys(keyList=['return'])
+            cross.setAutoDraw(True)
     feedback=visual.TextStim(window,'Block completed\nYour result: '+
                              str(per_corr[1])+' out of '+str(per_corr[0])+' correct in visual sequence\n'+
                              str(per_corr[0]-per_corr[1])+' miss\n'+
@@ -636,6 +720,8 @@ def aDistractor (fi, nback_no, window,  seq, dura, inMEG=False, trial_no=None, a
     trial_no=len(vseq)
     ready=visual.TextStim(window,'ready?', color=(1.0,1.0,1.0))
     cross=visual.TextStim(window,'+',color='white')
+    rest=visual.TextStim(window,'Well done! Have a break',color='white')
+
     infoloop=['Press return/enter to continue',
              'This is the auditory distractor 2-back test',
              'You will see a series that contains both audio tones and coloured squares together',
@@ -725,7 +811,29 @@ def aDistractor (fi, nback_no, window,  seq, dura, inMEG=False, trial_no=None, a
             pport_trig.setData( 0)#set all pin low
             #print 'trigger set DOWN'
         core.wait(0.5)
-
+        #q to quit        
+        if event.getKeys(keyList=['q' ,'escape']):
+            cross.setAutoDraw(False)
+            sure=visual.TextStim(window,'Do you want to quit?',color='white')
+            sure.draw()
+            window.flip()
+            pressed=event.waitKeys(keyList=None)
+            if pressed[0]=='return':                
+                window.close()
+                core.quit()
+            else:
+                cross.setAutoDraw(True)
+                pass;        
+        if n%50==0:
+            cross.setAutoDraw(False)
+            rest.draw()
+            window.flip()
+            core.wait(5.0)
+            ready.draw()
+            window.flip()
+            event.waitKeys(keyList=['return'])
+            cross.setAutoDraw(True)
+            
     feedback=visual.TextStim(window,'Block completed\nYour result: '+
                              str(per_corr[1])+' out of '+str(per_corr[0])+' correct in audio sequence\n'+
                              str(per_corr[0]-per_corr[1])+' miss\n'+
@@ -860,6 +968,8 @@ def betweenInterleaved (fi, nback_no, window, seq, dura, inMEG=False,trial_no=No
     trial_no=len(seq)
     ready=visual.TextStim(window,'ready?', color=(1.0,1.0,1.0))
     cross=visual.TextStim(window,'+',color='white')
+    rest=visual.TextStim(window,'Well done! Have a break',color='white')
+
     infoloop=['Press return/enter to continue',
              'This is the bewteen-modality interleaved 2-back test',
              'You will see a series that contains both audio tones and coloured squares SEPARATELY',
@@ -956,7 +1066,28 @@ def betweenInterleaved (fi, nback_no, window, seq, dura, inMEG=False,trial_no=No
             pport_trig.setData( 0)#set all pin low
             #print 'trigger set DOWN'
         core.wait(0.5)
-
+        #q to quit        
+        if event.getKeys(keyList=['q' ,'escape']):
+            cross.setAutoDraw(False)
+            sure=visual.TextStim(window,'Do you want to quit?',color='white')
+            sure.draw()
+            window.flip()
+            pressed=event.waitKeys(keyList=None)
+            if pressed[0]=='return':                
+                window.close()
+                core.quit()
+            else:
+                cross.setAutoDraw(True)
+                pass;        
+        if n%50==0:
+            cross.setAutoDraw(False)
+            rest.draw()
+            window.flip()
+            core.wait(5.0)
+            ready.draw()
+            window.flip()
+            event.waitKeys(keyList=['return'])
+            cross.setAutoDraw(True)
     feedback=visual.TextStim(window,'Block completed\nYour result: '+
                              str(per_corr[1])+' out of '+str(per_corr[0])+' correct\n'+
                              str(per_corr[0]-per_corr[1])+' miss\n'+

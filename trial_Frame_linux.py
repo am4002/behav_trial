@@ -17,7 +17,7 @@ from nback_helpers import infolooper, seqGen, pTrainer
      
 
 #structures
-wnd = visual.Window([1024,768],fullscr=True,allowGUI=False,units='pix',color=(-1,-1,-1)) #psychopy window
+
 funcLis = [] #list to hold all testing functions
 
 
@@ -32,12 +32,12 @@ def popFuncLis(lis): #creates a list of test functions shuffled in a random orde
     ons are created, they need to be added here.
     '''
     
-    #lis.append(vNback)
+    lis.append(vNback)
     #lis.append(aNback)
     
     #lis.append(withinInterleaved)
     #lis.append(betweenInterleaved)
-    lis.append(nPaired)
+    #lis.append(nPaired)
     #lis.append(nUnpaired)
     #lis.append(vDistractor)
     #lis.append(aDistractor)
@@ -65,6 +65,7 @@ if __name__ == '__main__':
     outFile = open(outName, 'wb')
     outWr = csv.writer(outFile) # a .csv file with that name. Could be improved, but gives us some control
     outWr.writerow(['%s, %s, %s, %s, %s\n'%('condition', 'trial_no', 'target', 'response', 'Reaction time')]) # write out header
+    wnd = visual.Window([1024,768],fullscr=True,allowGUI=False,units='pix',color=(-1,-1,-1)) #psychopy window    
     popFuncLis(funcLis) #populate list of test functions 
     wnd.flip() #initialize window 
     
@@ -89,10 +90,7 @@ if __name__ == '__main__':
         else:
             test(outWr, 2, wnd, tSq, 1.5) #filled with the generic arguments for all our test functions, change the number in seqGen() to make the list longer/shorter
         print str(test)+": test ended"
-        #q to quit
-        if event.getKeys(keyList=['escape','q']):
-            wnd.close()
-            core.quit()
+
     
     '''
     cleanup/file closing/participant thank you message
