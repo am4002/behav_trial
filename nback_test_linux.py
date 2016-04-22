@@ -287,7 +287,7 @@ def aNback (fi, nback_no, window, seq, dura, inMEG=False,trial_no=None, adaptive
             else:
                 cross.setAutoDraw(True)
                 pass;        
-        if n%50==0:
+        if n%50==0 and n!=0:
             cross.setAutoDraw(False)
             rest.draw()
             window.flip()
@@ -429,7 +429,7 @@ def nPaired (fi, nback_no, window, seq, dura, inMEG=False, trial_no=None, adapti
             else:
                 cross.setAutoDraw(True)
                 pass;        
-        if n%50==0:
+        if n%50==0 and n!=0:
             cross.setAutoDraw(False)
             rest.draw()
             window.flip()
@@ -687,7 +687,7 @@ def vDistractor (fi, nback_no, window,  seq, dura, inMEG=False,trial_no=None, ad
             else:
                 cross.setAutoDraw(True)
                 pass;        
-        if n%50==0:
+        if n%50==0 and n!=0:
             cross.setAutoDraw(False)
             rest.draw()
             window.flip()
@@ -824,7 +824,7 @@ def aDistractor (fi, nback_no, window,  seq, dura, inMEG=False, trial_no=None, a
             else:
                 cross.setAutoDraw(True)
                 pass;        
-        if n%50==0:
+        if n%50==0 and n!=0:
             cross.setAutoDraw(False)
             rest.draw()
             window.flip()
@@ -1079,7 +1079,7 @@ def betweenInterleaved (fi, nback_no, window, seq, dura, inMEG=False,trial_no=No
             else:
                 cross.setAutoDraw(True)
                 pass;        
-        if n%50==0:
+        if n%50==0 and n!=0:
             cross.setAutoDraw(False)
             rest.draw()
             window.flip()
