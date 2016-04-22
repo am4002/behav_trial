@@ -8,11 +8,12 @@
         April 22
     CHANGED:
         add MEG trigger and receiving response
+        measured the delay between audio & visual presentation is roughly 231-260 ms
 """
 #imports
 from psychopy import visual, sound, core, event,logging
 from random import randint, shuffle
-from nback_helpers import infolooper, quitTest
+from nback_helpers import infolooper
 import numpy as np
 import parallel #NB not psyhopy parallel
 
@@ -222,7 +223,11 @@ def aNback (fi, nback_no, window, seq, dura, inMEG=False,trial_no=None, adaptive
     #play stimuli and record response time
     for n, trial in enumerate(stimlist):
         response=None; hit=None; time=None
-        starttime=window.flip()
+        window.flip()
+        trial.play()
+        if inMEG ==True:
+            window.multiFlip(15)
+        
         #sending trigger######################################
         if inMEG == True:
             if target[n]==1:
@@ -231,8 +236,8 @@ def aNback (fi, nback_no, window, seq, dura, inMEG=False,trial_no=None, adaptive
             else:
                 pport_trig.setData( ((trigger+1)*2+1))
                 print 'trigger %s UP' % (str((trigger+1)*2+1))
-        trial.play()
 
+        starttime=window.flip()
         if inMEG==True:
             # wait for a response from MEG####################
             # this only matters for getting the behavioral data to csv files
@@ -354,16 +359,8 @@ def nPaired (fi, nback_no, window, seq, dura, inMEG=False, trial_no=None, adapti
         response=None; hit=None; time=None
         window.flip()
         astimlist[n].play()
-        window.multiFlip(9)
-#        window.flip()
-#        window.flip()
-#        window.flip()
-#        window.flip()
-#        window.flip()
-#        window.flip()
-#        window.flip()
-#        window.flip()
-#        window.flip()
+        if inMEG ==True:
+            window.multiFlip(15)
         vtrial.draw()
         #sending trigger######################################
         if inMEG == True:
@@ -620,8 +617,11 @@ def vDistractor (fi, nback_no, window,  seq, dura, inMEG=False,trial_no=None, ad
     #play/draw stimuli and record response time
     for n,vtrial in enumerate(vstimlist):
         response=None; hit=None; time=None;target=False
+        window.flip()
+        astimlist[n].play() 
+        if inMEG ==True:
+            window.multiFlip(15)
         vtrial.draw()
-        starttime=window.flip()
         
         #sending trigger######################################
         if inMEG == True:
@@ -630,7 +630,7 @@ def vDistractor (fi, nback_no, window,  seq, dura, inMEG=False,trial_no=None, ad
             else:
                 pport_trig.setData( ((trigger+1)*2+1))
             #print 'trigger set UP'
-        astimlist[n].play()
+        starttime=window.flip()
         if inMEG==True:
         
             # wait for a response from MEG####################
@@ -756,9 +756,12 @@ def aDistractor (fi, nback_no, window,  seq, dura, inMEG=False, trial_no=None, a
     #play/draw stimuli and record response time
     for n, vtrial in enumerate(vstimlist):
         response=None; hit=None; time=None;target=False
+        window.flip()
+        astimlist[n].play()
+        if inMEG ==True:
+            window.multiFlip(15)
         vtrial.draw()
-        starttime=window.flip()
-        
+
         #sending trigger######################################
         if inMEG == True:
             if atarget[n]==1:
@@ -766,8 +769,8 @@ def aDistractor (fi, nback_no, window,  seq, dura, inMEG=False, trial_no=None, a
             else:
                 pport_trig.setData( ((trigger+1)*2+1))
             #print 'trigger set UP'
-
-        astimlist[n].play()
+        starttime=window.flip()
+        
         if inMEG==True:
 
             # wait for a response from MEG####################
@@ -1009,11 +1012,16 @@ def betweenInterleaved (fi, nback_no, window, seq, dura, inMEG=False,trial_no=No
     #play/draw stimuli and record response time
     for n, trial in enumerate(stimlist):
         response=None; hit=None; time=None
+        window.flip()        
         if modality[n]==True:
             trial.draw()
             mod='visual'
-        starttime=window.flip()
         
+        if modality[n]==False:
+            trial.play()
+            mod='auditory'
+        if inMEG ==True:
+            window.multiFlip(15)
         #sending trigger######################################
         if inMEG == True:
             if target[n]==1:
@@ -1022,10 +1030,8 @@ def betweenInterleaved (fi, nback_no, window, seq, dura, inMEG=False,trial_no=No
                 pport_trig.setData( ((trigger+1)*2+1))
             #print 'trigger set UP'
 
-        if modality[n]==False:
-            trial.play()
-            mod='auditory'
-            
+
+        starttime=window.flip()
         if inMEG==True:
             # wait for a response from MEG####################
             # this only matters for getting the behavioral data to csv files

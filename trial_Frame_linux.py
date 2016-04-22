@@ -32,12 +32,12 @@ def popFuncLis(lis): #creates a list of test functions shuffled in a random orde
     ons are created, they need to be added here.
     '''
     
-    lis.append(vNback)
+    #lis.append(vNback)
     #lis.append(aNback)
     
     #lis.append(withinInterleaved)
     #lis.append(betweenInterleaved)
-    #lis.append(nPaired)
+    lis.append(nPaired)
     #lis.append(nUnpaired)
     #lis.append(vDistractor)
     #lis.append(aDistractor)
@@ -82,7 +82,7 @@ if __name__ == '__main__':
         prepMEG()
     #loop that executes test functions
     for test in funcLis:
-        tSq = seqGen(10,0.25) #here is where we specify how long the test sequence is going to be, and what % correct is desired
+        tSq = seqGen(50,0.25) #here is where we specify how long the test sequence is going to be, and what % correct is desired
         print "generation complete"        
         print str(test)+": test started"
         if MEG==True:

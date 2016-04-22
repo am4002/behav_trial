@@ -13,10 +13,7 @@ from psychopy import visual, event, sound, core
 
 
 #helper functions
-def quitTest(window, fi):
-    window.close()
-    fi.close()
-    core.quit()
+
 
 def infolooper(infoloop,window): #this function loops through a list of strings for presenting test specific info to participants
     for datum in infoloop: 
