@@ -66,7 +66,7 @@ if __name__ == '__main__':
     outFile = open(outName, 'wb')
     outWr = csv.writer(outFile) # a .csv file with that name. Could be improved, but gives us some control
     outWr.writerow(['%s, %s, %s, %s, %s\n'%('condition', 'trial_no', 'target', 'response', 'Reaction time')]) # write out header
-    wnd = visual.Window([1024,768],fullscr=False,allowGUI=True,units='pix',color=(-1,-1,-1)) #psychopy window    
+    wnd = visual.Window([1024,768],fullscr=False,allowGUI=False,units='pix',color=(-1,-1,-1)) #psychopy window    
 
     
     outTXT ='P%s_%s.txt'%(data['participantid'],data['expdate'])
