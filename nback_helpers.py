@@ -147,7 +147,7 @@ def pTrainer(window): #Association learner + a short test
     infolooper(infoloop2,window)
     n=[0,1,2,3]
     #adjust the number of repetition here
-    n.extend(n*1)
+    n.extend(n*4)
     shuffle(n)
     #iterate the pair 5 times
     for i in n:
