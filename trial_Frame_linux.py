@@ -34,14 +34,14 @@ def popFuncLis(lis): #creates a list of test functions shuffled in a random orde
     '''
     
     lis.append(vNback)
-    #lis.append(aNback)
+    lis.append(aNback)
     
     #lis.append(withinInterleaved)
-    #lis.append(betweenInterleaved)
-    #lis.append(nPaired)
+    lis.append(betweenInterleaved)
+    lis.append(nPaired)
     #lis.append(nUnpaired)
-    #lis.append(vDistractor)
-    #lis.append(aDistractor)
+    lis.append(vDistractor)
+    lis.append(aDistractor)
     '''
     lis.extend(1)
     '''
@@ -66,7 +66,7 @@ if __name__ == '__main__':
     outFile = open(outName, 'wb')
     outWr = csv.writer(outFile) # a .csv file with that name. Could be improved, but gives us some control
     outWr.writerow(['%s, %s, %s, %s, %s\n'%('condition', 'trial_no', 'target', 'response', 'Reaction time')]) # write out header
-    wnd = visual.Window([1024,768],fullscr=False,allowGUI=False,units='pix',color=(-1,-1,-1)) #psychopy window    
+    wnd = visual.Window([1024,768],fullscr=True,allowGUI=False,units='pix',color=(-1,-1,-1)) #psychopy window    
 
     
     outTXT ='P%s_%s.txt'%(data['participantid'],data['expdate'])
@@ -90,7 +90,7 @@ if __name__ == '__main__':
         
     #loop that executes test functions
     for test in funcLis:
-        tSq = seqGen(15,0.25) #here is where we specify how long the test sequence is going to be, and what % correct is desired
+        tSq = seqGen(150,0.25) #here is where we specify how long the test sequence is going to be, and what % correct is desired
         print "generation complete"        
         print str(test)+": test started"
         if MEG==True:
