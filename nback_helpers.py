@@ -3,9 +3,10 @@
 these are helper functions that are not tests themselves
 
 Updated date:
-    April 17
+    April 26
 Change:
     a test is added to the association trainer
+    quit function added
 """
 #imports
 from random import randint, shuffle

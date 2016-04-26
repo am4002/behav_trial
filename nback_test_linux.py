@@ -5,10 +5,12 @@
     TODO:
         
     Updated date:
-        April 22
+        April 26
     CHANGED:
         add MEG trigger and receiving response
         measured the delay between audio & visual presentation is roughly 231-260 ms
+        Fixed flickring on Interleaved condition in MEG
+        No break in MEG session (Gary suggested)
 """
 #imports
 from psychopy import visual, sound, core, event,logging
@@ -16,7 +18,8 @@ sound.init(rate=44100, stereo=True, buffer=4096)
 from random import randint, shuffle
 from nback_helpers import infolooper
 import numpy as np
-import parallel #NB not psyhopy parallel
+#----------Comment out this line if not in MEG session; Change it back in MEG session-----------------
+#import parallel #NB not psyhopy parallel
 
 
 
@@ -75,13 +78,11 @@ def vNback (fi, seqFi, nback_no, window, seq, dura, inMEG=False, trial_no=None, 
                 target.append(0)
         n = n+1
 
-    conditionTx=visual.TextStim(window,'Visual 2-back test', color=(1.0,1.0,1.0))
-    conditionTx.draw()
-    window.flip()
-    event.waitKeys(keyList='return')
     if inMEG == False:        
         infolooper(infoloop,window) #present basic test info for participant (what test, etc)
-    window.flip()
+        window.flip()
+    conditionTx=visual.TextStim(window,'Visual 2-back test', color=(1.0,1.0,1.0), pos=(0.0,300))
+    conditionTx.draw()
     vpicture.draw()
     window.flip()
     event.waitKeys(keyList=['return'])
@@ -98,7 +99,6 @@ def vNback (fi, seqFi, nback_no, window, seq, dura, inMEG=False, trial_no=None, 
         trial.draw()
         starttime=window.flip()
         #sending trigger######################################
-        # Always do: visual stimulus - win.flip() - send trigger - auditory stimulus
         if inMEG == True:
             if target[n]==1:
                 pport_trig.setData( (trigger*2+1))
@@ -163,15 +163,16 @@ def vNback (fi, seqFi, nback_no, window, seq, dura, inMEG=False, trial_no=None, 
             else:
                 cross.setAutoDraw(True)
                 pass;
-        if n%50==0 and n!=0:
-            cross.setAutoDraw(False)
-            rest.draw()
-            window.flip()
-            core.wait(5.0)
-            ready.draw()
-            window.flip()
-            event.waitKeys(keyList=['return'])
-            cross.setAutoDraw(True)
+        if inMEG==False: #During training session give the subject a break
+            if n%50==0 and n!=0:
+                cross.setAutoDraw(False)
+                rest.draw()
+                window.flip()
+                core.wait(5.0)
+                ready.draw()
+                window.flip()
+                event.waitKeys(keyList=['return'])
+                cross.setAutoDraw(True)
 
     #feedback to the participants
     feedback=visual.TextStim(window,'Block completed\nYour result: '+
@@ -218,13 +219,12 @@ def aNback (fi, seqFi, nback_no, window, seq, dura, inMEG=False,trial_no=None, a
             else:
                 target.append(0)
         n = n+1
-    conditionTx=visual.TextStim(window,'Auditory 2-back test', color=(1.0,1.0,1.0))
-    conditionTx.draw()
-    window.flip()
-    event.waitKeys(keyList='return')
+
     if inMEG == False:        
         infolooper(infoloop,window) #present basic test info for participant (what test, etc)
-    window.flip()
+        window.flip()
+    conditionTx=visual.TextStim(window,'Auditory 2-back test', color=(1.0,1.0,1.0),pos=(0.0,300))
+    conditionTx.draw()
     apicture.draw()
     window.flip()
     event.waitKeys(keyList=['return']) #present basic test info for participant (what test, etc)
@@ -306,15 +306,16 @@ def aNback (fi, seqFi, nback_no, window, seq, dura, inMEG=False,trial_no=None, a
             else:
                 cross.setAutoDraw(True)
                 pass;        
-        if n%50==0 and n!=0:
-            cross.setAutoDraw(False)
-            rest.draw()
-            window.flip()
-            core.wait(5.0)
-            ready.draw()
-            window.flip()
-            event.waitKeys(keyList=['return'])
-            cross.setAutoDraw(True)
+        if inMEG==False:
+            if n%50==0 and n!=0:
+                cross.setAutoDraw(False)
+                rest.draw()
+                window.flip()
+                core.wait(5.0)
+                ready.draw()
+                window.flip()
+                event.waitKeys(keyList=['return'])
+                cross.setAutoDraw(True)
         
     feedback=visual.TextStim(window,'Block completed\nYour result: '+
                              str(per_corr[1])+' out of '+str(per_corr[0])+' correct\n'+
@@ -366,13 +367,12 @@ def nPaired (fi, seqFi, nback_no, window, seq, dura, inMEG=False, trial_no=None,
             else:
                 target.append(0)
         n = n+1
-    conditionTx=visual.TextStim(window,'Paired 2-back test', color=(1.0,1.0,1.0))
-    conditionTx.draw()
-    window.flip()
-    event.waitKeys(keyList='return')
+
     if inMEG == False:        
         infolooper(infoloop,window) #present basic test info for participant (what test, etc)
-    window.flip()
+        window.flip()
+    conditionTx=visual.TextStim(window,'Paired 2-back test', color=(1.0,1.0,1.0),pos=(0.0,300))
+    conditionTx.draw()
     ppicture.draw()
     window.flip()
     event.waitKeys(keyList=['return']) #present basic test info for participant (what test, etc)
@@ -454,15 +454,16 @@ def nPaired (fi, seqFi, nback_no, window, seq, dura, inMEG=False, trial_no=None,
             else:
                 cross.setAutoDraw(True)
                 pass;        
-        if n%50==0 and n!=0:
-            cross.setAutoDraw(False)
-            rest.draw()
-            window.flip()
-            core.wait(5.0)
-            ready.draw()
-            window.flip()
-            event.waitKeys(keyList=['return'])
-            cross.setAutoDraw(True)
+        if inMEG==False:
+            if n%50==0 and n!=0:
+                cross.setAutoDraw(False)
+                rest.draw()
+                window.flip()
+                core.wait(5.0)
+                ready.draw()
+                window.flip()
+                event.waitKeys(keyList=['return'])
+                cross.setAutoDraw(True)
             
     feedback=visual.TextStim(window,'Block completed\nYour result: '+
                              str(per_corr[1])+' out of '+str(per_corr[0])+' correct\n'+
@@ -478,6 +479,470 @@ def nPaired (fi, seqFi, nback_no, window, seq, dura, inMEG=False, trial_no=None,
     print >> seqFi, str(per_corr[2])+' false hit\n'
     fi.writerow([])
 
+
+#visual distractor condition
+def vDistractor (fi, seqFi, nback_no, window,  seq, dura, inMEG=False,trial_no=None, adaptive=False):
+
+    #data structures
+    trigger=9
+    vseq = seq
+    aseq = list(seq) #make auditory sequence different from visual one
+    shuffle(aseq)
+    trial_no=len(vseq)
+    ready=visual.TextStim(window,'ready?', color=(1.0,1.0,1.0))
+    cross=visual.TextStim(window,'+',color='white')
+    rest=visual.TextStim(window,'Well done! Have a break',color='white')
+
+    infoloop=['Press return/enter to continue',
+             'This is the visual distractor 2-back test',
+             'You will see a series that contains both audio tones and coloured squares together',
+             'In this test, please only pay attention to the visual colour squares, and ignore the tones',
+             'Press press L if the colour matches with the one two steps back']
+    vdpicture = visual.ImageStim(window,'visual_distractor.png',pos=(0,0))
+    vstimlist=[];astimlist=[]
+    vtarget=[0,0];atarget=[0,0]
+    n=0
+
+    #create two stimuli lists and mark down target trials
+    for i in vseq:
+        vstimlist.append(visual.Rect(window,width=200.0,height=200.0,lineColor=colorcode[i],fillColor=colorcode[i], pos=(0,0)))
+        astimlist.append(sound.Sound(audicode[aseq[n]],octave=4, sampleRate=44100, secs=dura,bits=32))
+        if n > nback_no-1:
+            #if the event match with n events ago (n specified by 'nback_no')
+            #mark it as a target trial
+            if i==vseq[n-nback_no]:
+                vtarget.append(1)
+            else:
+                vtarget.append(0)
+            if aseq[n]==aseq[n-nback_no]:
+                atarget.append(1)
+            else:
+                atarget.append(0)
+        n = n+1
+
+    if inMEG == False:        
+        infolooper(infoloop,window) #present basic test info for participant (what test, etc)
+        window.flip()
+    conditionTx=visual.TextStim(window,'Visual distractor 2-back test', color=(1.0,1.0,1.0),pos=(0.0,300))
+    conditionTx.draw()
+    vdpicture.draw()
+    window.flip()
+    event.waitKeys(keyList=['return']) #present basic test info for participant (what test, etc)
+    ready.draw()
+    window.flip()
+    event.waitKeys(keyList=['return'])
+    per_corr=[vtarget.count(1),0,0]
+    cross.setAutoDraw(True)
+
+    #play/draw stimuli and record response time
+    for n,vtrial in enumerate(vstimlist):
+        response=None; hit=None; time=None;target=False
+        window.flip()
+        astimlist[n].play() 
+        if inMEG ==True:
+            window.multiFlip(15)
+        vtrial.draw()
+        
+        #sending trigger######################################
+        if inMEG == True:
+            if vtarget[n]==1:
+                pport_trig.setData( (trigger*2+1))
+            else:
+                pport_trig.setData( ((trigger+1)*2+1))
+            #print 'trigger set UP'
+        starttime=window.flip()
+        if inMEG==True:
+        
+            # wait for a response from MEG####################
+            # this only matters for getting the behavioral data to csv files
+            ##pport_resp.Out32(pport_resp_addr, 0) # first, clear the line
+            this_resp = 0
+            # now wait for duration specified
+            #print 'wait for response'
+            while (this_resp ==0) and ((logging.defaultClock.getTime() - starttime) <= dura):
+                this_resp= int(pport_resp.getData())
+            if this_resp !=0:#need to be adjusted depending on which button the participant is using
+                response=np.array([[this_resp,logging.defaultClock.getTime()]])#log the response time
+                #print 'response is logged'
+            while(logging.defaultClock.getTime() - starttime) <= dura:
+                pass
+            #print 'waiting ended'
+            #print (logging.defaultClock.getTime()-starttime)
+            #print (this_resp)
+        else: #wait for a response from normal keyboard
+            #each stimulus is presented for the duration specified
+            response=event.waitKeys(maxWait=dura-(1/120.0),keyList=['l'],timeStamped=True)
+            while(logging.defaultClock.getTime() - starttime) <= dura:#making sure every event duration is the same no matter getting a key or not 
+                pass
+                
+        if response!=None:
+            if vtarget[n]==1: #if target trials and get keypress, set 'hit' and 'target' to true
+                hit=True;target=True
+                per_corr[1]=per_corr[1]+1
+            else: #if not target trials but get keypress, set 'hit' and 'target' to false
+                hit=False;target=False
+                per_corr[2]=per_corr[2]+1
+            time=response[0][1]-starttime #record RT for any keypress
+        else: #if no keypress, mark down trial type
+            if vtarget[n]==1:
+                target=True
+
+        window.flip()
+        #output includes: condition, trial number, whether it's target, whether a hit, RT
+        fi.writerow(['%s, %d, %s, %s, %s\n'%('vDistractor ', n+1, target, str(hit), str(time))])
+        if inMEG==True:
+            pport_trig.setData( 0)#set all pin low
+            #print 'trigger set DOWN'
+        core.wait(0.5)
+        #q to quit        
+        if event.getKeys(keyList=['q' ,'escape']):
+            cross.setAutoDraw(False)
+            sure=visual.TextStim(window,'Do you want to quit?',color='white')
+            sure.draw()
+            window.flip()
+            pressed=event.waitKeys(keyList=None)
+            if pressed[0]=='return':                
+                window.close()
+                core.quit()
+            else:
+                cross.setAutoDraw(True)
+                pass;        
+        if inMEG==False:
+            if n%50==0 and n!=0:
+                cross.setAutoDraw(False)
+                rest.draw()
+                window.flip()
+                core.wait(5.0)
+                ready.draw()
+                window.flip()
+                event.waitKeys(keyList=['return'])
+                cross.setAutoDraw(True)
+    feedback=visual.TextStim(window,'Block completed\nYour result: '+
+                             str(per_corr[1])+' out of '+str(per_corr[0])+' correct in visual sequence\n'+
+                             str(per_corr[0]-per_corr[1])+' miss\n'+
+                             str(per_corr[2])+' false hit', color=(1.0,1.0,1.0))
+    cross.setAutoDraw(False)
+    feedback.draw()
+    window.flip()
+    core.wait(2.0)
+    print >> seqFi, 'Testing sequence, visual distractor, visual:  %s \n' % str(vseq)
+    print >> seqFi, 'Testing sequence, visual distractor, auditory:  %s \n' % str(aseq)
+    print >> seqFi, str(per_corr[1])+' out of '+str(per_corr[0])+' correct'
+    print >> seqFi, str(per_corr[0]-per_corr[1])+' miss'
+    print >> seqFi, str(per_corr[2])+' false hit\n'
+    fi.writerow([])
+   
+   
+#Auditory distractor condition
+def aDistractor (fi, seqFi, nback_no, window,  seq, dura, inMEG=False, trial_no=None, adaptive=False):
+
+    #data structures
+    trigger=11
+    vseq = seq
+    aseq = list(seq) #make auditory sequence different from visual one
+    shuffle(aseq)
+    trial_no=len(vseq)
+    ready=visual.TextStim(window,'ready?', color=(1.0,1.0,1.0))
+    cross=visual.TextStim(window,'+',color='white')
+    rest=visual.TextStim(window,'Well done! Have a break',color='white')
+
+    infoloop=['Press return/enter to continue',
+             'This is the auditory distractor 2-back test',
+             'You will see a series that contains both audio tones and coloured squares together',
+             'In this test, please only pay attention to the audio tones, and ignore the coloured squares',
+             'Press press L if the tone matches with the one two steps back']
+    adpicture = visual.ImageStim(window,'auditory_distractor.png',pos=(0,0))         
+    vstimlist=[];astimlist=[]
+    vtarget=[0,0];atarget=[0,0]
+    n=0
+
+    #create two stimuli lists and mark down target trials
+    for i in vseq:
+        vstimlist.append(visual.Rect(window,width=200.0,height=200.0,lineColor=colorcode[i],fillColor=colorcode[i], pos=(0,0)))
+        astimlist.append(sound.Sound(audicode[aseq[n]],octave=4, sampleRate=44100, secs=dura,bits=32))
+        if n > nback_no-1:
+            #if the event match with n events ago (n specified by 'nback_no')
+            #mark it as a target trial
+            if i==vseq[n-nback_no]:
+                vtarget.append(1)
+            else:
+                vtarget.append(0)
+            if aseq[n]==aseq[n-nback_no]:
+                atarget.append(1)
+            else:
+                atarget.append(0)
+        n = n+1
+
+
+    if inMEG == False:        
+        infolooper(infoloop,window) #present basic test info for participant (what test, etc)
+        window.flip()
+    conditionTx=visual.TextStim(window,'Auditory distractor 2-back test', color=(1.0,1.0,1.0),pos=(0.0,300))
+    conditionTx.draw()
+    adpicture.draw()
+    window.flip()
+    event.waitKeys(keyList=['return']) #present basic test info for participant (what test, etc)
+    ready.draw()
+    window.flip()
+    event.waitKeys(keyList=['return'])
+    per_corr=[atarget.count(1),0,0]
+    cross.setAutoDraw(True)
+    #play/draw stimuli and record response time
+    for n, vtrial in enumerate(vstimlist):
+        response=None; hit=None; time=None;target=False
+        window.flip()
+        astimlist[n].play()
+        if inMEG ==True:
+            window.multiFlip(15)
+        vtrial.draw()
+
+        #sending trigger######################################
+        if inMEG == True:
+            if atarget[n]==1:
+                pport_trig.setData( (trigger*2+1))
+            else:
+                pport_trig.setData( ((trigger+1)*2+1))
+            #print 'trigger set UP'
+        starttime=window.flip()
+        
+        if inMEG==True:
+
+            # wait for a response from MEG####################
+            # this only matters for getting the behavioral data to csv files
+            ##pport_resp.Out32(pport_resp_addr, 0) # first, clear the line
+            this_resp = 0
+            # now wait for duration specified
+            #print 'wait for response'
+            while (this_resp ==0) and ((logging.defaultClock.getTime() - starttime) <= dura):
+                this_resp= int(pport_resp.getData())
+            if this_resp !=0:#need to be adjusted depending on which button the participant is using
+                response=np.array([[this_resp,logging.defaultClock.getTime()]])#log the response time
+                #print 'response is logged'
+            while(logging.defaultClock.getTime() - starttime) <= dura:
+                pass
+            #print 'waiting ended'
+            #print (logging.defaultClock.getTime()-starttime)
+            #print (this_resp)
+        else: #wait for a response from normal keyboard
+            #each stimulus is presented for the duration specified
+            response=event.waitKeys(maxWait=dura-(1/120.0),keyList=['l'],timeStamped=True)
+            while(logging.defaultClock.getTime() - starttime) <= dura:#making sure every event duration is the same no matter getting a key or not 
+                pass
+
+        if response!=None:
+            if atarget[n]==1: #if target trials and get keypress, set 'hit' and 'target' to true
+                hit=True;target=True
+                per_corr[1]=per_corr[1]+1
+            else: #if not target trials but get keypress, set 'hit' and 'target' to false
+                hit=False;target=False
+                per_corr[2]=per_corr[2]+1
+            time=response[0][1]-starttime #record RT for any keypress
+        else: #if no keypress, mark down trial type
+            if atarget[n]==1:
+                target=True
+
+        window.flip()
+        #output includes: condition, trial number, whether it's target, whether a hit, RT
+        fi.writerow(['%s, %d, %s, %s, %s\n'%('aDistractor ', n+1, target, str(hit), str(time))])
+        if inMEG==True:
+            pport_trig.setData( 0)#set all pin low
+            #print 'trigger set DOWN'
+        core.wait(0.5)
+        #q to quit        
+        if event.getKeys(keyList=['q' ,'escape']):
+            cross.setAutoDraw(False)
+            sure=visual.TextStim(window,'Do you want to quit?',color='white')
+            sure.draw()
+            window.flip()
+            pressed=event.waitKeys(keyList=None)
+            if pressed[0]=='return':                
+                window.close()
+                core.quit()
+            else:
+                cross.setAutoDraw(True)
+                pass;        
+        if inMEG==False:
+            if n%50==0 and n!=0:
+                cross.setAutoDraw(False)
+                rest.draw()
+                window.flip()
+                core.wait(5.0)
+                ready.draw()
+                window.flip()
+                event.waitKeys(keyList=['return'])
+                cross.setAutoDraw(True)
+            
+    feedback=visual.TextStim(window,'Block completed\nYour result: '+
+                             str(per_corr[1])+' out of '+str(per_corr[0])+' correct in audio sequence\n'+
+                             str(per_corr[0]-per_corr[1])+' miss\n'+
+                             str(per_corr[2])+' false hit', color=(1.0,1.0,1.0))
+    cross.setAutoDraw(False)
+    feedback.draw()
+    window.flip()
+    core.wait(4.0)
+    print >> seqFi, 'Testing sequence, auditory distractor, visual:  %s \n' % str(vseq)
+    print >> seqFi, 'Testing sequence, auditory distractor, auditory:  %s \n' % str(aseq)
+    print >> seqFi, str(per_corr[1])+' out of '+str(per_corr[0])+' correct'
+    print >> seqFi, str(per_corr[0]-per_corr[1])+' miss'
+    print >> seqFi, str(per_corr[2])+' false hit\n'
+    fi.writerow([])
+   
+
+def betweenInterleaved (fi, seqFi, nback_no, window, seq, dura, inMEG=False,trial_no=None, adaptive=False):
+
+    #data structures
+    trigger=15
+    trial_no=len(seq)
+    ready=visual.TextStim(window,'ready?', color=(1.0,1.0,1.0))
+    cross=visual.TextStim(window,'+',color='white')
+    rest=visual.TextStim(window,'Well done! Have a break',color='white')
+
+    infoloop=['Press return/enter to continue',
+             'This is the bewteen-modality interleaved 2-back test',
+             'You will see a series that contains both audio tones and coloured squares SEPARATELY',
+             'Press L if the tone played matches the associated colour two steps back, or vice versa']
+    bipicture = visual.ImageStim(window,'interleaved.png',pos=(0,0))
+    stimlist=[]
+    target=[0,0];modality=[]
+    n=0
+
+    #decide stimuli modality
+    for i in range(len(seq)):
+        modality.append(randint(0,1)==0)
+    for i in seq:
+        if n > nback_no-1:
+            #if the event match with the one n events ago (n specified by argument 'nback_no')
+            #mark it as a target trial
+            if i==seq[n-nback_no]:
+                target.append(1)
+                #adjust stimuli modality to make the target and
+                #the event it matches to from DIFFERENT modalities
+                if modality[n]==modality[n-nback_no]:
+                    modality[n]=not modality[n]
+            else:
+                target.append(0)
+        # create stimlist with two modalities
+        if modality[n]==True:
+            stimlist.append(visual.Rect(window,width=200.0,height=200.0,lineColor=colorcode[i],fillColor=colorcode[i], pos=(0,0)))
+        else:
+            stimlist.append(sound.Sound(audicode[i],octave=4, sampleRate=44100, secs=dura,bits=32))
+        n=n+1
+
+    if inMEG == False:        
+        infolooper(infoloop,window) #present basic test info for participant (what test, etc)
+        window.flip()
+    conditionTx=visual.TextStim(window,'Audio-visual interleaved 2-back test', color=(1.0,1.0,1.0),pos=(0.0,300))
+    conditionTx.draw()
+    bipicture.draw()
+    window.flip()
+    event.waitKeys(keyList=['return']) #present basic test info for participant (what test, etc)
+    ready.draw()
+    window.flip()
+    event.waitKeys(keyList=['return'])
+    mod=None
+    per_corr=[target.count(1),0,0]
+    cross.setAutoDraw(True)
+    #play/draw stimuli and record response time
+    for n, trial in enumerate(stimlist):
+        response=None; hit=None; time=None
+        window.flip()        
+        
+        if modality[n]==False:
+            trial.play()
+            mod='auditory'
+        if inMEG ==True:
+            window.multiFlip(15)
+        if modality[n]==True:
+            trial.draw()
+            mod='visual'
+        #sending trigger######################################
+        if inMEG == True:
+            if target[n]==1:
+                pport_trig.setData( (trigger*2+1))
+            else:
+                pport_trig.setData( ((trigger+1)*2+1))
+            #print 'trigger set UP'
+
+
+        starttime=window.flip()
+        if inMEG==True:
+            # wait for a response from MEG####################
+            # this only matters for getting the behavioral data to csv files
+            ##pport_resp.Out32(pport_resp_addr, 0) # first, clear the line
+            this_resp = 0
+            # now wait for duration specified
+            #print 'wait for response'
+            while (this_resp ==0) and ((logging.defaultClock.getTime() - starttime) <= dura):
+                this_resp= int(pport_resp.getData())
+            if this_resp !=0:#need to be adjusted depending on which button the participant is using
+                response=np.array([[this_resp,logging.defaultClock.getTime()]])#log the response time
+                #print 'response is logged'
+            while(logging.defaultClock.getTime() - starttime) <= dura:
+                pass
+            #print 'waiting ended'
+            #print (logging.defaultClock.getTime()-starttime)
+            #print (this_resp)
+        else: #wait for a response from normal keyboard
+            #each stimulus is presented for the duration specified
+            response=event.waitKeys(maxWait=dura-(1/120.0),keyList=['l'],timeStamped=True)
+            while(logging.defaultClock.getTime() - starttime) <= dura:#making sure every event duration is the same no matter getting a key or not 
+                pass
+
+        if response!=None:
+            if target[n]==1: #if target trials and get keypress, set 'hit' to true
+                hit=True
+            else: #if not target trials but get keypress, set 'hit' to false
+                hit=False
+            time=response[0][1]-starttime #record RT for any keypress
+        if hit==True: #record response accuracy
+            per_corr[1]=per_corr[1]+1
+        elif hit==False:
+            per_corr[2]=per_corr[2]+1
+        #output includes: condition, modality, trial number, whether it's target, whether a hit, RT
+        fi.writerow(['%s, %d, %s, %s, %s\n'%('betweenInterleaved '+mod, n+1, str(target[n]==1), str(hit), str(time))])
+        window.flip()
+        if inMEG==True:
+            pport_trig.setData( 0)#set all pin low
+            #print 'trigger set DOWN'
+        core.wait(0.5)
+        #q to quit        
+        if event.getKeys(keyList=['q' ,'escape']):
+            cross.setAutoDraw(False)
+            sure=visual.TextStim(window,'Do you want to quit?',color='white')
+            sure.draw()
+            window.flip()
+            pressed=event.waitKeys(keyList=None)
+            if pressed[0]=='return':                
+                window.close()
+                core.quit()
+            else:
+                cross.setAutoDraw(True)
+                pass;        
+        if inMEG==False:
+            if n%50==0 and n!=0:
+                cross.setAutoDraw(False)
+                rest.draw()
+                window.flip()
+                core.wait(5.0)
+                ready.draw()
+                window.flip()
+                event.waitKeys(keyList=['return'])
+                cross.setAutoDraw(True)
+    feedback=visual.TextStim(window,'Block completed\nYour result: '+
+                             str(per_corr[1])+' out of '+str(per_corr[0])+' correct\n'+
+                             str(per_corr[0]-per_corr[1])+' miss\n'+
+                             str(per_corr[2])+' false hit', color=(1.0,1.0,1.0))
+    cross.setAutoDraw(False)
+    feedback.draw()
+    window.flip()
+    core.wait(4.0)
+    print >> seqFi, 'Testing sequence, between interleaved:  %s \n' % str(seq)
+    print >> seqFi, str(per_corr[1])+' out of '+str(per_corr[0])+' correct'
+    print >> seqFi, str(per_corr[0]-per_corr[1])+' miss'
+    print >> seqFi, str(per_corr[2])+' false hit\n'
+    fi.writerow([])
+
+#Conditions not used for this experiment
 #unpaired nback task
 def nUnpaired (fi, seqFi, nback_no, window,  seq, dura,inMEG=False, trial_no=None, adaptive=False):
 
@@ -610,313 +1075,6 @@ def nUnpaired (fi, seqFi, nback_no, window,  seq, dura,inMEG=False, trial_no=Non
     fi.writerow([])
 
 
-#visual distractor condition
-def vDistractor (fi, seqFi, nback_no, window,  seq, dura, inMEG=False,trial_no=None, adaptive=False):
-
-    #data structures
-    trigger=9
-    vseq = seq
-    aseq = list(seq) #make auditory sequence different from visual one
-    shuffle(aseq)
-    trial_no=len(vseq)
-    ready=visual.TextStim(window,'ready?', color=(1.0,1.0,1.0))
-    cross=visual.TextStim(window,'+',color='white')
-    rest=visual.TextStim(window,'Well done! Have a break',color='white')
-
-    infoloop=['Press return/enter to continue',
-             'This is the visual distractor 2-back test',
-             'You will see a series that contains both audio tones and coloured squares together',
-             'In this test, please only pay attention to the visual colour squares, and ignore the tones',
-             'Press press L if the colour matches with the one two steps back']
-    vdpicture = visual.ImageStim(window,'visual_distractor.png',pos=(0,0))
-    vstimlist=[];astimlist=[]
-    vtarget=[0,0];atarget=[0,0]
-    n=0
-
-    #create two stimuli lists and mark down target trials
-    for i in vseq:
-        vstimlist.append(visual.Rect(window,width=200.0,height=200.0,lineColor=colorcode[i],fillColor=colorcode[i], pos=(0,0)))
-        astimlist.append(sound.Sound(audicode[aseq[n]],octave=4, sampleRate=44100, secs=dura,bits=32))
-        if n > nback_no-1:
-            #if the event match with n events ago (n specified by 'nback_no')
-            #mark it as a target trial
-            if i==vseq[n-nback_no]:
-                vtarget.append(1)
-            else:
-                vtarget.append(0)
-            if aseq[n]==aseq[n-nback_no]:
-                atarget.append(1)
-            else:
-                atarget.append(0)
-        n = n+1
-    conditionTx=visual.TextStim(window,'Visual distractor 2-back test', color=(1.0,1.0,1.0))
-    conditionTx.draw()
-    window.flip()
-    event.waitKeys(keyList='return')
-    if inMEG == False:        
-        infolooper(infoloop,window) #present basic test info for participant (what test, etc)
-    window.flip()
-    vdpicture.draw()
-    window.flip()
-    event.waitKeys(keyList=['return']) #present basic test info for participant (what test, etc)
-    ready.draw()
-    window.flip()
-    event.waitKeys(keyList=['return'])
-    per_corr=[vtarget.count(1),0,0]
-    cross.setAutoDraw(True)
-
-    #play/draw stimuli and record response time
-    for n,vtrial in enumerate(vstimlist):
-        response=None; hit=None; time=None;target=False
-        window.flip()
-        astimlist[n].play() 
-        if inMEG ==True:
-            window.multiFlip(15)
-        vtrial.draw()
-        
-        #sending trigger######################################
-        if inMEG == True:
-            if vtarget[n]==1:
-                pport_trig.setData( (trigger*2+1))
-            else:
-                pport_trig.setData( ((trigger+1)*2+1))
-            #print 'trigger set UP'
-        starttime=window.flip()
-        if inMEG==True:
-        
-            # wait for a response from MEG####################
-            # this only matters for getting the behavioral data to csv files
-            ##pport_resp.Out32(pport_resp_addr, 0) # first, clear the line
-            this_resp = 0
-            # now wait for duration specified
-            #print 'wait for response'
-            while (this_resp ==0) and ((logging.defaultClock.getTime() - starttime) <= dura):
-                this_resp= int(pport_resp.getData())
-            if this_resp !=0:#need to be adjusted depending on which button the participant is using
-                response=np.array([[this_resp,logging.defaultClock.getTime()]])#log the response time
-                #print 'response is logged'
-            while(logging.defaultClock.getTime() - starttime) <= dura:
-                pass
-            #print 'waiting ended'
-            #print (logging.defaultClock.getTime()-starttime)
-            #print (this_resp)
-        else: #wait for a response from normal keyboard
-            #each stimulus is presented for the duration specified
-            response=event.waitKeys(maxWait=dura-(1/120.0),keyList=['l'],timeStamped=True)
-            while(logging.defaultClock.getTime() - starttime) <= dura:#making sure every event duration is the same no matter getting a key or not 
-                pass
-                
-        if response!=None:
-            if vtarget[n]==1: #if target trials and get keypress, set 'hit' and 'target' to true
-                hit=True;target=True
-                per_corr[1]=per_corr[1]+1
-            else: #if not target trials but get keypress, set 'hit' and 'target' to false
-                hit=False;target=False
-                per_corr[2]=per_corr[2]+1
-            time=response[0][1]-starttime #record RT for any keypress
-        else: #if no keypress, mark down trial type
-            if vtarget[n]==1:
-                target=True
-
-        window.flip()
-        #output includes: condition, trial number, whether it's target, whether a hit, RT
-        fi.writerow(['%s, %d, %s, %s, %s\n'%('vDistractor ', n+1, target, str(hit), str(time))])
-        if inMEG==True:
-            pport_trig.setData( 0)#set all pin low
-            #print 'trigger set DOWN'
-        core.wait(0.5)
-        #q to quit        
-        if event.getKeys(keyList=['q' ,'escape']):
-            cross.setAutoDraw(False)
-            sure=visual.TextStim(window,'Do you want to quit?',color='white')
-            sure.draw()
-            window.flip()
-            pressed=event.waitKeys(keyList=None)
-            if pressed[0]=='return':                
-                window.close()
-                core.quit()
-            else:
-                cross.setAutoDraw(True)
-                pass;        
-        if n%50==0 and n!=0:
-            cross.setAutoDraw(False)
-            rest.draw()
-            window.flip()
-            core.wait(5.0)
-            ready.draw()
-            window.flip()
-            event.waitKeys(keyList=['return'])
-            cross.setAutoDraw(True)
-    feedback=visual.TextStim(window,'Block completed\nYour result: '+
-                             str(per_corr[1])+' out of '+str(per_corr[0])+' correct in visual sequence\n'+
-                             str(per_corr[0]-per_corr[1])+' miss\n'+
-                             str(per_corr[2])+' false hit', color=(1.0,1.0,1.0))
-    cross.setAutoDraw(False)
-    feedback.draw()
-    window.flip()
-    core.wait(2.0)
-    print >> seqFi, 'Testing sequence, visual distractor, visual:  %s \n' % str(vseq)
-    print >> seqFi, 'Testing sequence, visual distractor, auditory:  %s \n' % str(aseq)
-    print >> seqFi, str(per_corr[1])+' out of '+str(per_corr[0])+' correct'
-    print >> seqFi, str(per_corr[0]-per_corr[1])+' miss'
-    print >> seqFi, str(per_corr[2])+' false hit\n'
-    fi.writerow([])
-   
-   
-#Auditory distractor condition
-def aDistractor (fi, seqFi, nback_no, window,  seq, dura, inMEG=False, trial_no=None, adaptive=False):
-
-    #data structures
-    trigger=11
-    vseq = seq
-    aseq = list(seq) #make auditory sequence different from visual one
-    shuffle(aseq)
-    trial_no=len(vseq)
-    ready=visual.TextStim(window,'ready?', color=(1.0,1.0,1.0))
-    cross=visual.TextStim(window,'+',color='white')
-    rest=visual.TextStim(window,'Well done! Have a break',color='white')
-
-    infoloop=['Press return/enter to continue',
-             'This is the auditory distractor 2-back test',
-             'You will see a series that contains both audio tones and coloured squares together',
-             'In this test, please only pay attention to the audio tones, and ignore the coloured squares',
-             'Press press L if the tone matches with the one two steps back']
-    adpicture = visual.ImageStim(window,'auditory_distractor.png',pos=(0,0))         
-    vstimlist=[];astimlist=[]
-    vtarget=[0,0];atarget=[0,0]
-    n=0
-
-    #create two stimuli lists and mark down target trials
-    for i in vseq:
-        vstimlist.append(visual.Rect(window,width=200.0,height=200.0,lineColor=colorcode[i],fillColor=colorcode[i], pos=(0,0)))
-        astimlist.append(sound.Sound(audicode[aseq[n]],octave=4, sampleRate=44100, secs=dura,bits=32))
-        if n > nback_no-1:
-            #if the event match with n events ago (n specified by 'nback_no')
-            #mark it as a target trial
-            if i==vseq[n-nback_no]:
-                vtarget.append(1)
-            else:
-                vtarget.append(0)
-            if aseq[n]==aseq[n-nback_no]:
-                atarget.append(1)
-            else:
-                atarget.append(0)
-        n = n+1
-    conditionTx=visual.TextStim(window,'Auditory distractor 2-back test', color=(1.0,1.0,1.0))
-    conditionTx.draw()
-    window.flip()
-    event.waitKeys(keyList='return')
-    if inMEG == False:        
-        infolooper(infoloop,window) #present basic test info for participant (what test, etc)
-    window.flip()
-    adpicture.draw()
-    window.flip()
-    event.waitKeys(keyList=['return']) #present basic test info for participant (what test, etc)
-    ready.draw()
-    window.flip()
-    event.waitKeys(keyList=['return'])
-    per_corr=[atarget.count(1),0,0]
-    cross.setAutoDraw(True)
-    #play/draw stimuli and record response time
-    for n, vtrial in enumerate(vstimlist):
-        response=None; hit=None; time=None;target=False
-        window.flip()
-        astimlist[n].play()
-        if inMEG ==True:
-            window.multiFlip(15)
-        vtrial.draw()
-
-        #sending trigger######################################
-        if inMEG == True:
-            if atarget[n]==1:
-                pport_trig.setData( (trigger*2+1))
-            else:
-                pport_trig.setData( ((trigger+1)*2+1))
-            #print 'trigger set UP'
-        starttime=window.flip()
-        
-        if inMEG==True:
-
-            # wait for a response from MEG####################
-            # this only matters for getting the behavioral data to csv files
-            ##pport_resp.Out32(pport_resp_addr, 0) # first, clear the line
-            this_resp = 0
-            # now wait for duration specified
-            #print 'wait for response'
-            while (this_resp ==0) and ((logging.defaultClock.getTime() - starttime) <= dura):
-                this_resp= int(pport_resp.getData())
-            if this_resp !=0:#need to be adjusted depending on which button the participant is using
-                response=np.array([[this_resp,logging.defaultClock.getTime()]])#log the response time
-                #print 'response is logged'
-            while(logging.defaultClock.getTime() - starttime) <= dura:
-                pass
-            #print 'waiting ended'
-            #print (logging.defaultClock.getTime()-starttime)
-            #print (this_resp)
-        else: #wait for a response from normal keyboard
-            #each stimulus is presented for the duration specified
-            response=event.waitKeys(maxWait=dura-(1/120.0),keyList=['l'],timeStamped=True)
-            while(logging.defaultClock.getTime() - starttime) <= dura:#making sure every event duration is the same no matter getting a key or not 
-                pass
-
-        if response!=None:
-            if atarget[n]==1: #if target trials and get keypress, set 'hit' and 'target' to true
-                hit=True;target=True
-                per_corr[1]=per_corr[1]+1
-            else: #if not target trials but get keypress, set 'hit' and 'target' to false
-                hit=False;target=False
-                per_corr[2]=per_corr[2]+1
-            time=response[0][1]-starttime #record RT for any keypress
-        else: #if no keypress, mark down trial type
-            if atarget[n]==1:
-                target=True
-
-        window.flip()
-        #output includes: condition, trial number, whether it's target, whether a hit, RT
-        fi.writerow(['%s, %d, %s, %s, %s\n'%('aDistractor ', n+1, target, str(hit), str(time))])
-        if inMEG==True:
-            pport_trig.setData( 0)#set all pin low
-            #print 'trigger set DOWN'
-        core.wait(0.5)
-        #q to quit        
-        if event.getKeys(keyList=['q' ,'escape']):
-            cross.setAutoDraw(False)
-            sure=visual.TextStim(window,'Do you want to quit?',color='white')
-            sure.draw()
-            window.flip()
-            pressed=event.waitKeys(keyList=None)
-            if pressed[0]=='return':                
-                window.close()
-                core.quit()
-            else:
-                cross.setAutoDraw(True)
-                pass;        
-        if n%50==0 and n!=0:
-            cross.setAutoDraw(False)
-            rest.draw()
-            window.flip()
-            core.wait(5.0)
-            ready.draw()
-            window.flip()
-            event.waitKeys(keyList=['return'])
-            cross.setAutoDraw(True)
-            
-    feedback=visual.TextStim(window,'Block completed\nYour result: '+
-                             str(per_corr[1])+' out of '+str(per_corr[0])+' correct in audio sequence\n'+
-                             str(per_corr[0]-per_corr[1])+' miss\n'+
-                             str(per_corr[2])+' false hit', color=(1.0,1.0,1.0))
-    cross.setAutoDraw(False)
-    feedback.draw()
-    window.flip()
-    core.wait(4.0)
-    print >> seqFi, 'Testing sequence, auditory distractor, visual:  %s \n' % str(vseq)
-    print >> seqFi, 'Testing sequence, auditory distractor, auditory:  %s \n' % str(aseq)
-    print >> seqFi, str(per_corr[1])+' out of '+str(per_corr[0])+' correct'
-    print >> seqFi, str(per_corr[0]-per_corr[1])+' miss'
-    print >> seqFi, str(per_corr[2])+' false hit\n'
-    fi.writerow([])
-   
-   
 # a-a/v-v interleaved condition
 def withinInterleaved (fi, seqFi, nback_no, window, seq, dura, inMEG=False, trial_no=None, adaptive=False):
 
@@ -1031,158 +1189,4 @@ def withinInterleaved (fi, seqFi, nback_no, window, seq, dura, inMEG=False, tria
     window.flip()
     core.wait(4.0)
     print >> seqFi, 'Testing sequence, within interleaved:  %s \n' % str(seq)
-    fi.writerow([])
-
-def betweenInterleaved (fi, seqFi, nback_no, window, seq, dura, inMEG=False,trial_no=None, adaptive=False):
-
-    #data structures
-    trigger=15
-    trial_no=len(seq)
-    ready=visual.TextStim(window,'ready?', color=(1.0,1.0,1.0))
-    cross=visual.TextStim(window,'+',color='white')
-    rest=visual.TextStim(window,'Well done! Have a break',color='white')
-
-    infoloop=['Press return/enter to continue',
-             'This is the bewteen-modality interleaved 2-back test',
-             'You will see a series that contains both audio tones and coloured squares SEPARATELY',
-             'Press L if the tone played matches the associated colour two steps back, or vice versa']
-    bipicture = visual.ImageStim(window,'interleaved.png',pos=(0,0))
-    stimlist=[]
-    target=[0,0];modality=[]
-    n=0
-
-    #decide stimuli modality
-    for i in range(len(seq)):
-        modality.append(randint(0,1)==0)
-    for i in seq:
-        if n > nback_no-1:
-            #if the event match with the one n events ago (n specified by argument 'nback_no')
-            #mark it as a target trial
-            if i==seq[n-nback_no]:
-                target.append(1)
-                #adjust stimuli modality to make the target and
-                #the event it matches to from DIFFERENT modalities
-                if modality[n]==modality[n-nback_no]:
-                    modality[n]=not modality[n]
-            else:
-                target.append(0)
-        # create stimlist with two modalities
-        if modality[n]==True:
-            stimlist.append(visual.Rect(window,width=200.0,height=200.0,lineColor=colorcode[i],fillColor=colorcode[i], pos=(0,0)))
-        else:
-            stimlist.append(sound.Sound(audicode[i],octave=4, sampleRate=44100, secs=dura,bits=32))
-        n=n+1
-    conditionTx=visual.TextStim(window,'Audio-visual interleaved 2-back test', color=(1.0,1.0,1.0))
-    conditionTx.draw()
-    window.flip()
-    event.waitKeys(keyList='return')
-    if inMEG == False:        
-        infolooper(infoloop,window) #present basic test info for participant (what test, etc)
-    window.flip()
-    bipicture.draw()
-    window.flip()
-    event.waitKeys(keyList=['return']) #present basic test info for participant (what test, etc)
-    ready.draw()
-    window.flip()
-    event.waitKeys(keyList=['return'])
-    mod=None
-    per_corr=[target.count(1),0,0]
-    cross.setAutoDraw(True)
-    #play/draw stimuli and record response time
-    for n, trial in enumerate(stimlist):
-        response=None; hit=None; time=None
-        window.flip()        
-        
-        if modality[n]==False:
-            trial.play()
-            mod='auditory'
-        if inMEG ==True:
-            window.multiFlip(15)
-        if modality[n]==True:
-            trial.draw()
-            mod='visual'
-        #sending trigger######################################
-        if inMEG == True:
-            if target[n]==1:
-                pport_trig.setData( (trigger*2+1))
-            else:
-                pport_trig.setData( ((trigger+1)*2+1))
-            #print 'trigger set UP'
-
-
-        starttime=window.flip()
-        if inMEG==True:
-            # wait for a response from MEG####################
-            # this only matters for getting the behavioral data to csv files
-            ##pport_resp.Out32(pport_resp_addr, 0) # first, clear the line
-            this_resp = 0
-            # now wait for duration specified
-            #print 'wait for response'
-            while (this_resp ==0) and ((logging.defaultClock.getTime() - starttime) <= dura):
-                this_resp= int(pport_resp.getData())
-            if this_resp !=0:#need to be adjusted depending on which button the participant is using
-                response=np.array([[this_resp,logging.defaultClock.getTime()]])#log the response time
-                #print 'response is logged'
-            while(logging.defaultClock.getTime() - starttime) <= dura:
-                pass
-            #print 'waiting ended'
-            #print (logging.defaultClock.getTime()-starttime)
-            #print (this_resp)
-        else: #wait for a response from normal keyboard
-            #each stimulus is presented for the duration specified
-            response=event.waitKeys(maxWait=dura-(1/120.0),keyList=['l'],timeStamped=True)
-            while(logging.defaultClock.getTime() - starttime) <= dura:#making sure every event duration is the same no matter getting a key or not 
-                pass
-
-        if response!=None:
-            if target[n]==1: #if target trials and get keypress, set 'hit' to true
-                hit=True
-            else: #if not target trials but get keypress, set 'hit' to false
-                hit=False
-            time=response[0][1]-starttime #record RT for any keypress
-        if hit==True: #record response accuracy
-            per_corr[1]=per_corr[1]+1
-        elif hit==False:
-            per_corr[2]=per_corr[2]+1
-        #output includes: condition, modality, trial number, whether it's target, whether a hit, RT
-        fi.writerow(['%s, %d, %s, %s, %s\n'%('betweenInterleaved '+mod, n+1, str(target[n]==1), str(hit), str(time))])
-        window.flip()
-        if inMEG==True:
-            pport_trig.setData( 0)#set all pin low
-            #print 'trigger set DOWN'
-        core.wait(0.5)
-        #q to quit        
-        if event.getKeys(keyList=['q' ,'escape']):
-            cross.setAutoDraw(False)
-            sure=visual.TextStim(window,'Do you want to quit?',color='white')
-            sure.draw()
-            window.flip()
-            pressed=event.waitKeys(keyList=None)
-            if pressed[0]=='return':                
-                window.close()
-                core.quit()
-            else:
-                cross.setAutoDraw(True)
-                pass;        
-        if n%50==0 and n!=0:
-            cross.setAutoDraw(False)
-            rest.draw()
-            window.flip()
-            core.wait(5.0)
-            ready.draw()
-            window.flip()
-            event.waitKeys(keyList=['return'])
-            cross.setAutoDraw(True)
-    feedback=visual.TextStim(window,'Block completed\nYour result: '+
-                             str(per_corr[1])+' out of '+str(per_corr[0])+' correct\n'+
-                             str(per_corr[0]-per_corr[1])+' miss\n'+
-                             str(per_corr[2])+' false hit', color=(1.0,1.0,1.0))
-    cross.setAutoDraw(False)
-    feedback.draw()
-    window.flip()
-    core.wait(4.0)
-    print >> seqFi, 'Testing sequence, between interleaved:  %s \n' % str(seq)
-    print >> seqFi, str(per_corr[1])+' out of '+str(per_corr[0])+' correct'
-    print >> seqFi, str(per_corr[0]-per_corr[1])+' miss'
-    print >> seqFi, str(per_corr[2])+' false hit\n'
     fi.writerow([])

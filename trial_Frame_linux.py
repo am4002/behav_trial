@@ -28,23 +28,17 @@ def popFuncLis(lis): #creates a list of test functions shuffled in a random orde
     within here all the test functions should be appeneded to the funcLis list, ie. all the tests we will run.
     if new functi
     
-    
-    
     ons are created, they need to be added here.
     '''
     
-    #lis.append(vNback)
-    #lis.append(aNback)
-    
-    #lis.append(withinInterleaved)
+    lis.append(vNback)
+    lis.append(aNback)
     lis.append(betweenInterleaved)
-    #lis.append(nPaired)
-    ##lis.append(nUnpaired)
-    #lis.append(vDistractor)
-    #lis.append(aDistractor)
-    '''
-    lis.extend(1)
-    '''
+    lis.append(nPaired)
+    lis.append(vDistractor)
+    lis.append(aDistractor)
+    #lis.append(withinInterleaved)
+    #lis.append(nUnpaired)
     shuffle(lis) #randomize order of tests performed
     return 0
 
@@ -80,7 +74,7 @@ if __name__ == '__main__':
              'Welcome participant '+data['participantid'],
              'In this experiment you will preform a series of N-back tests that involve visual and auditory components',
              'Each test is prefaced by a short explanation',
-             'If you have any remaining questions, or would no longer like to take part in this pilot study, please notify an experimenter now']
+             'If you have any remaining questions, or would no longer like to take part in this study, please notify an experimenter now']
     infolooper(startInfo, wnd) #loop through initial information 
     
     if Training==True:
@@ -104,7 +98,7 @@ if __name__ == '__main__':
     cleanup/file closing/participant thank you message
     '''
     outFile.close() #close the output file
-    thanks=visual.TextStim(wnd,'thank you for your participation, all tests are concluded', color=(1.0,1.0,1.0)) #thank the subject for their participation
+    thanks=visual.TextStim(wnd,'Thank you for your participation, all tests are concluded', color=(1.0,1.0,1.0)) #thank the subject for their participation
     thanks.draw()
     wnd.flip()
     event.waitKeys(keyList=['return'])    
