@@ -33,15 +33,15 @@ def popFuncLis(lis): #creates a list of test functions shuffled in a random orde
     ons are created, they need to be added here.
     '''
     
-    lis.append(vNback)
-    lis.append(aNback)
+    #lis.append(vNback)
+    #lis.append(aNback)
     
     #lis.append(withinInterleaved)
     lis.append(betweenInterleaved)
-    lis.append(nPaired)
-    #lis.append(nUnpaired)
-    lis.append(vDistractor)
-    lis.append(aDistractor)
+    #lis.append(nPaired)
+    ##lis.append(nUnpaired)
+    #lis.append(vDistractor)
+    #lis.append(aDistractor)
     '''
     lis.extend(1)
     '''

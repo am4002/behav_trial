@@ -16,17 +16,14 @@ sound.init(rate=44100, stereo=True, buffer=4096)
 from random import randint, shuffle
 from nback_helpers import infolooper
 import numpy as np
-#import parallel #NB not psyhopy parallel
+import parallel #NB not psyhopy parallel
 
 
 
 #Global variables
 colorcode=['red','blue','green','yellow']
 audicode=[233.2,277.2,329.6,392]
-pport_resp=None
-pport_resp_addr=None
-pport_trig=1
-pport_trig_addr=None
+
 
 #a function that initiate MEG-related variables
 
@@ -1095,15 +1092,15 @@ def betweenInterleaved (fi, seqFi, nback_no, window, seq, dura, inMEG=False,tria
     for n, trial in enumerate(stimlist):
         response=None; hit=None; time=None
         window.flip()        
-        if modality[n]==True:
-            trial.draw()
-            mod='visual'
         
         if modality[n]==False:
             trial.play()
             mod='auditory'
         if inMEG ==True:
             window.multiFlip(15)
+        if modality[n]==True:
+            trial.draw()
+            mod='visual'
         #sending trigger######################################
         if inMEG == True:
             if target[n]==1:
