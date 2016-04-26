@@ -187,6 +187,9 @@ def vNback (fi, seqFi, nback_no, window, seq, dura, inMEG=False, trial_no=None, 
     core.wait(4.0)
     
     print >> seqFi, 'Testing sequence, visual:  %s \n' % str(seq)
+    print >> seqFi, str(per_corr[1])+' out of '+str(per_corr[0])+' correct'
+    print >> seqFi, str(per_corr[0]-per_corr[1])+' miss'
+    print >> seqFi, str(per_corr[2])+' false hit\n'
     fi.writerow([])
     
 def aNback (fi, seqFi, nback_no, window, seq, dura, inMEG=False,trial_no=None, adaptive=False):#auditory n-back task
@@ -326,6 +329,9 @@ def aNback (fi, seqFi, nback_no, window, seq, dura, inMEG=False,trial_no=None, a
     window.flip()
     core.wait(4.0)
     print >> seqFi, 'Testing sequence, auditory:  %s \n' % str(seq)
+    print >> seqFi, str(per_corr[1])+' out of '+str(per_corr[0])+' correct'
+    print >> seqFi, str(per_corr[0]-per_corr[1])+' miss'
+    print >> seqFi, str(per_corr[2])+' false hit\n'
     fi.writerow([])
 
 #paired nback task
@@ -470,6 +476,9 @@ def nPaired (fi, seqFi, nback_no, window, seq, dura, inMEG=False, trial_no=None,
     window.flip()
     core.wait(4.0)
     print >> seqFi, 'Testing sequence, paired:  %s \n' % str(seq)
+    print >> seqFi, str(per_corr[1])+' out of '+str(per_corr[0])+' correct'
+    print >> seqFi, str(per_corr[0]-per_corr[1])+' miss'
+    print >> seqFi, str(per_corr[2])+' false hit\n'
     fi.writerow([])
 
 #unpaired nback task
@@ -751,6 +760,9 @@ def vDistractor (fi, seqFi, nback_no, window,  seq, dura, inMEG=False,trial_no=N
     core.wait(2.0)
     print >> seqFi, 'Testing sequence, visual distractor, visual:  %s \n' % str(vseq)
     print >> seqFi, 'Testing sequence, visual distractor, auditory:  %s \n' % str(aseq)
+    print >> seqFi, str(per_corr[1])+' out of '+str(per_corr[0])+' correct'
+    print >> seqFi, str(per_corr[0]-per_corr[1])+' miss'
+    print >> seqFi, str(per_corr[2])+' false hit\n'
     fi.writerow([])
    
    
@@ -902,6 +914,9 @@ def aDistractor (fi, seqFi, nback_no, window,  seq, dura, inMEG=False, trial_no=
     core.wait(4.0)
     print >> seqFi, 'Testing sequence, auditory distractor, visual:  %s \n' % str(vseq)
     print >> seqFi, 'Testing sequence, auditory distractor, auditory:  %s \n' % str(aseq)
+    print >> seqFi, str(per_corr[1])+' out of '+str(per_corr[0])+' correct'
+    print >> seqFi, str(per_corr[0]-per_corr[1])+' miss'
+    print >> seqFi, str(per_corr[2])+' false hit\n'
     fi.writerow([])
    
    
@@ -1170,4 +1185,7 @@ def betweenInterleaved (fi, seqFi, nback_no, window, seq, dura, inMEG=False,tria
     window.flip()
     core.wait(4.0)
     print >> seqFi, 'Testing sequence, between interleaved:  %s \n' % str(seq)
+    print >> seqFi, str(per_corr[1])+' out of '+str(per_corr[0])+' correct'
+    print >> seqFi, str(per_corr[0]-per_corr[1])+' miss'
+    print >> seqFi, str(per_corr[2])+' false hit\n'
     fi.writerow([])

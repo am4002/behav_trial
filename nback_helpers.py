@@ -157,6 +157,17 @@ def pTrainer(window): #Association learner + a short test
         core.wait(1.5)
         window.flip()
         core.wait(0.7)
+        #q to quit        
+        if event.getKeys(keyList=['q' ,'escape']):
+            sure=visual.TextStim(window,'Do you want to quit?',color='white')
+            sure.draw()
+            window.flip()
+            pressed=event.waitKeys(keyList=None)
+            if pressed[0]=='return':                
+                window.close()
+                core.quit()
+            else:
+                pass;
 
     s1=visual.TextStim(window,'Press L or Enter',color='white')
     infolooper(infoloop3,window)
@@ -299,6 +310,17 @@ def pTrainer(window): #Association learner + a short test
                 core.wait(1.0)
                 window.flip()
                 core.wait(1.0)
+        #q to quit        
+        if event.getKeys(keyList=['q' ,'escape']):
+            sure=visual.TextStim(window,'Do you want to quit?',color='white')
+            sure.draw()
+            window.flip()
+            pressed=event.waitKeys(keyList=None)
+            if pressed[0]=='return':                
+                window.close()
+                core.quit()
+            else:
+                pass;        
         w5.draw() #ask for answers
         window.flip()
         answer=event.waitKeys(keyList=['z','m'])

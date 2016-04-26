@@ -62,14 +62,14 @@ if __name__ == '__main__':
         core.quit()
     MEG=data['MEG']
     Training=data['Training']
-    outName='P%s_%s.csv'%(data['participantid'],data['expdate'])
+    outName='%s_%s.csv'%(data['participantid'],data['expdate'])
     outFile = open(outName, 'wb')
     outWr = csv.writer(outFile) # a .csv file with that name. Could be improved, but gives us some control
     outWr.writerow(['%s, %s, %s, %s, %s\n'%('condition', 'trial_no', 'target', 'response', 'Reaction time')]) # write out header
     wnd = visual.Window([1024,768],fullscr=True,allowGUI=False,units='pix',color=(-1,-1,-1)) #psychopy window    
 
     
-    outTXT ='P%s_%s.txt'%(data['participantid'],data['expdate'])
+    outTXT ='%s_%s.txt'%(data['participantid'],data['expdate'])
     outTxFile = open(outTXT, 'wb')
 
     popFuncLis(funcLis) #populate list of test functions 
