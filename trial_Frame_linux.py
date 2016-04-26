@@ -32,11 +32,11 @@ def popFuncLis(lis): #creates a list of test functions shuffled in a random orde
     '''
     
     lis.append(vNback)
-    lis.append(aNback)
-    lis.append(betweenInterleaved)
-    lis.append(nPaired)
-    lis.append(vDistractor)
-    lis.append(aDistractor)
+#    lis.append(aNback)
+#    lis.append(betweenInterleaved)
+#    lis.append(nPaired)
+#    lis.append(vDistractor)
+#    lis.append(aDistractor)
     #lis.append(withinInterleaved)
     #lis.append(nUnpaired)
     shuffle(lis) #randomize order of tests performed
@@ -57,14 +57,12 @@ if __name__ == '__main__':
     MEG=data['MEG']
     Training=data['Training']
     outName='%s_%s.csv'%(data['participantid'],data['expdate'])
-    outFile = open(outName, 'wb')
-    outWr = csv.writer(outFile) # a .csv file with that name. Could be improved, but gives us some control
-    outWr.writerow(['%s, %s, %s, %s, %s\n'%('condition', 'trial_no', 'target', 'response', 'Reaction time')]) # write out header
-    wnd = visual.Window([1024,768],fullscr=True,allowGUI=False,units='pix',color=(-1,-1,-1)) #psychopy window    
-
-    
     outTXT ='%s_%s.txt'%(data['participantid'],data['expdate'])
-    outTxFile = open(outTXT, 'wb')
+    #outFile = open(outName, 'wb')
+    #outWr = csv.writer(outFile) # a .csv file with that name. Could be improved, but gives us some control
+    #outWr.writerow(['%s, %s, %s, %s, %s\n'%('condition', 'trial_no', 'target', 'response', 'Reaction time')]) # write out header
+    #outTxFile = open(outTXT, 'wb')
+    wnd = visual.Window([1024,768],fullscr=True,allowGUI=False,units='pix',color=(-1,-1,-1)) #psychopy window    
 
     popFuncLis(funcLis) #populate list of test functions 
     wnd.flip() #initialize window 
@@ -83,15 +81,18 @@ if __name__ == '__main__':
         prepMEG()
         
     #loop that executes test functions
-    for test in funcLis:
-        tSq = seqGen(150,0.25) #here is where we specify how long the test sequence is going to be, and what % correct is desired
-        print "generation complete"        
-        print str(test)+": test started"
-        if MEG==True:
-            test(outWr, outTxFile, 2, wnd, tSq, 1.5,inMEG=True)
-        else:
-            test(outWr, outTxFile, 2, wnd, tSq, 1.5) #filled with the generic arguments for all our test functions, change the number in seqGen() to make the list longer/shorter
-        print str(test)+": test ended"
+    with open (outName, 'wb') as outFile, open (outTXT, 'wb') as outTxFile: #with statement makes sure files are closed no matter what happens
+        outWr = csv.writer(outFile) # a .csv file with that name. Could be improved, but gives us some control
+        outWr.writerow(['%s, %s, %s, %s, %s\n'%('condition', 'trial_no', 'target', 'response', 'Reaction time')]) # write out header
+        for test in funcLis:
+            tSq = seqGen(150,0.25) #here is where we specify how long the test sequence is going to be, and what % correct is desired
+            print "generation complete"        
+            print str(test)+": test started"
+            if MEG==True:
+                test(outWr, outTxFile, 2, wnd, tSq, 1.5,inMEG=True)
+            else:
+                test(outWr, outTxFile, 2, wnd, tSq, 1.5) #filled with the generic arguments for all our test functions, change the number in seqGen() to make the list longer/shorter
+            print str(test)+": test ended"
 
     
     '''

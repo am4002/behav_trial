@@ -158,6 +158,7 @@ def vNback (fi, seqFi, nback_no, window, seq, dura, inMEG=False, trial_no=None, 
             window.flip()
             pressed=event.waitKeys(keyList=None)
             if pressed[0]=='return':                
+                print >> seqFi, 'Testing sequence, visual:  %s \n' % str(seq)
                 window.close()
                 core.quit()
             else:
@@ -300,7 +301,8 @@ def aNback (fi, seqFi, nback_no, window, seq, dura, inMEG=False,trial_no=None, a
             sure.draw()
             window.flip()
             pressed=event.waitKeys(keyList=None)
-            if pressed[0]=='return':                
+            if pressed[0]=='return':
+                print >> seqFi, 'Testing sequence, auditory:  %s \n' % str(seq)
                 window.close()
                 core.quit()
             else:
@@ -448,7 +450,8 @@ def nPaired (fi, seqFi, nback_no, window, seq, dura, inMEG=False, trial_no=None,
             sure.draw()
             window.flip()
             pressed=event.waitKeys(keyList=None)
-            if pressed[0]=='return':                
+            if pressed[0]=='return':
+                print >> seqFi, 'Testing sequence, paired:  %s \n' % str(seq)
                 window.close()
                 core.quit()
             else:
@@ -601,7 +604,9 @@ def vDistractor (fi, seqFi, nback_no, window,  seq, dura, inMEG=False,trial_no=N
             sure.draw()
             window.flip()
             pressed=event.waitKeys(keyList=None)
-            if pressed[0]=='return':                
+            if pressed[0]=='return':
+                print >> seqFi, 'Testing sequence, visual distractor, visual:  %s \n' % str(vseq)
+                print >> seqFi, 'Testing sequence, visual distractor, auditory:  %s \n' % str(aseq)
                 window.close()
                 core.quit()
             else:
@@ -755,7 +760,9 @@ def aDistractor (fi, seqFi, nback_no, window,  seq, dura, inMEG=False, trial_no=
             sure.draw()
             window.flip()
             pressed=event.waitKeys(keyList=None)
-            if pressed[0]=='return':                
+            if pressed[0]=='return':
+                print >> seqFi, 'Testing sequence, auditory distractor, visual:  %s \n' % str(vseq)
+                print >> seqFi, 'Testing sequence, auditory distractor, auditory:  %s \n' % str(aseq)
                 window.close()
                 core.quit()
             else:
@@ -912,7 +919,8 @@ def betweenInterleaved (fi, seqFi, nback_no, window, seq, dura, inMEG=False,tria
             sure.draw()
             window.flip()
             pressed=event.waitKeys(keyList=None)
-            if pressed[0]=='return':                
+            if pressed[0]=='return':
+                print >> seqFi, 'Testing sequence, between interleaved:  %s \n' % str(seq)
                 window.close()
                 core.quit()
             else:
