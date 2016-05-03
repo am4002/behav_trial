@@ -3,9 +3,10 @@
 these are helper functions that are not tests themselves
 
 Updated date:
-    April 17
+    April 26
 Change:
     a test is added to the association trainer
+    quit function added
 """
 #imports
 from random import randint, shuffle
@@ -13,8 +14,6 @@ from psychopy import visual, event, sound, core
 
 
 #helper functions
-
-
 def infolooper(infoloop,window): #this function loops through a list of strings for presenting test specific info to participants
     for datum in infoloop: 
         infLin=visual.TextStim(window,datum, color=(1.0,1.0,1.0)) #make a text stimuli
@@ -149,7 +148,7 @@ def pTrainer(window): #Association learner + a short test
     infolooper(infoloop2,window)
     n=[0,1,2,3]
     #adjust the number of repetition here
-    n.extend(n*1)
+    n.extend(n*4)
     shuffle(n)
     #iterate the pair 5 times
     for i in n:
@@ -159,6 +158,17 @@ def pTrainer(window): #Association learner + a short test
         core.wait(1.5)
         window.flip()
         core.wait(0.7)
+        #q to quit        
+        if event.getKeys(keyList=['q' ,'escape']):
+            sure=visual.TextStim(window,'Do you want to quit?',color='white')
+            sure.draw()
+            window.flip()
+            pressed=event.waitKeys(keyList=None)
+            if pressed[0]=='return':                
+                window.close()
+                core.quit()
+            else:
+                pass;
 
     s1=visual.TextStim(window,'Press L or Enter',color='white')
     infolooper(infoloop3,window)
@@ -301,6 +311,17 @@ def pTrainer(window): #Association learner + a short test
                 core.wait(1.0)
                 window.flip()
                 core.wait(1.0)
+        #q to quit        
+        if event.getKeys(keyList=['q' ,'escape']):
+            sure=visual.TextStim(window,'Do you want to quit?',color='white')
+            sure.draw()
+            window.flip()
+            pressed=event.waitKeys(keyList=None)
+            if pressed[0]=='return':                
+                window.close()
+                core.quit()
+            else:
+                pass;        
         w5.draw() #ask for answers
         window.flip()
         answer=event.waitKeys(keyList=['z','m'])
